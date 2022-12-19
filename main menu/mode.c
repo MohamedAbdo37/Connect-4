@@ -23,6 +23,7 @@ void mode(void)
         system("cls");
         printf("invalid number ,please try again!!\n");
         mainmenu();
+        mode();    
         break;
     }
 
