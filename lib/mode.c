@@ -6,8 +6,7 @@ void mode(void)
     switch (selection){
     case 1:
         system("cls");
-        printf("%c 1-VS Human\n",16);
-        printf("%c 2-VS Computer\n",16);
+ 
         break;
     case 2:
          system("cls");
@@ -23,7 +22,6 @@ void mode(void)
         system("cls");
         printf("invalid number ,please try again!!\n");
         mainmenu();
-        mode();    
         break;
     }
 
