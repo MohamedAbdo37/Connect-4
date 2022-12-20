@@ -113,7 +113,7 @@ void game_display(int player_1 ,int player_2){
     board_display();
     getchar();
 }
-void top_players_display(void){
+void top_players_display(int * selection){
    for (int i=0;i<10;i++){
     printf("%c %d:\n-------------------------------\n",16,i+1);
    }
@@ -122,7 +122,7 @@ void top_players_display(void){
     
 
 }
-void load_display(void){
+void load_display(int * selection){
     printf("%c Saved Game 1\n",16);
     printf("%c Saved Game 2\n",16);
     printf("%c Saved Game 3\n",16);

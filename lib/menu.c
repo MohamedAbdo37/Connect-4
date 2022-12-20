@@ -13,11 +13,13 @@ void mainMenu(int * selection)
         break;
     case 2:
         system("cls");
-        void load_display();
+        void load_display(selection);
+        getchar();
         break;
     case 3:
         system("cls");
-        top_players_display();
+        top_players_display(selection);
+        getchar();
         break;
     case 4:
         system("cls");
