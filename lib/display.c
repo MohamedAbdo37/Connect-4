@@ -5,7 +5,7 @@
 
 int width = 9;
 int hight = 7;
-char * cell ; 
+char * cell ;
 
 void setDimension(int x, int y){
     width = x;
@@ -33,7 +33,7 @@ void mainMenu_display(int * selection){
     printf("%c         %c 2-load game             %c\n",186,16,186);
     printf("%c         %c 3-Top players           %c\n",186,16,186);
     printf("%c         %c 4-Quit                  %c\n",186,16,186);
-    
+
     for (int i=0;i<1;i++){
         printf("%c                                   ",186);
         printf("%c\n",186);
@@ -54,9 +54,9 @@ void playMode_display(int * s){
 
     for (int i=0;i<35;i++)
         printf("%c",205);
-    
+
     printf("%c\n",187);
-    
+
     printf("%c         %c 1-Player 1 VS Playr 2   %c\n",186,16,186);
     printf("%c         %c 2-VS Computer           %c\n",186,16,186);
     printf("%c         %c 3-Main menu             %c\n",186,16,186);
@@ -91,7 +91,7 @@ void board_display(){
         printf(" %c |",*(cell+i));
     }
     printf("\n\t\t");
-    
+
     for (int i=0 ;i <= 4 * width ;i++)
                 printf("%c",205);
 
@@ -99,7 +99,7 @@ void board_display(){
 
     for (int i=0;i<width ;i++)
         printf(" %d  ",i+1);
-    printf("\n"); 
+    printf("\n");
 
 }
 
@@ -112,4 +112,19 @@ void game_display(int player_1 ,int player_2){
 
     board_display();
     getchar();
+}
+void top_players_display(void){
+   for (int i=0;i<10;i++){
+    printf("%c %d:\n-------------------------------\n",16,i+1);
+   }
+    mainMenu_display(selection);
+
+    
+
+}
+void load_display(void){
+    printf("%c Saved Game 1\n",16);
+    printf("%c Saved Game 2\n",16);
+    printf("%c Saved Game 3\n",16);
+    mainMenu_display(selection);
 }

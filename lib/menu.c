@@ -12,10 +12,12 @@ void mainMenu(int * selection)
         playMode_display(selection);
         break;
     case 2:
-         system("cls");
+        system("cls");
+        void load_display();
         break;
     case 3:
         system("cls");
+        top_players_display();
         break;
     case 4:
         system("cls");
