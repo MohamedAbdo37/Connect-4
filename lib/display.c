@@ -53,3 +53,13 @@ void playMode_display(void){
     printf("%c",16);
     playMode();
 }
+
+void board_display(int y , int x ,char * cell){
+    
+    for(int i = 0 , i< x*y ; i++){
+        if(i%x == 0)
+            printf("\n|");
+        printf(" %c |",*(cell+i));
+    }
+
+}
