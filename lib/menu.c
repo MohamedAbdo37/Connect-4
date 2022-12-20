@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "display.h"
 
-void mainMenu(void)
-{
-    int selection;
-    scanf("%d",&selection);
-    switch (selection){
+void mainMenu(int * selection)
+{   
+    scanf("%d",selection);
+    switch (*selection){
     case 1:
         system("cls");
         playMode_display();
@@ -21,6 +21,7 @@ void mainMenu(void)
     case 4:
         system("cls");
         printf("See you soon!!!");
+        Sleep(1000);
         exit(0);
         break;
     default:
@@ -32,27 +33,26 @@ void mainMenu(void)
 
 }
 
-void playMode(void){
-     int selection;
-    scanf("%d",&selection);
-    switch (selection)
+void playMode(int * selection){
+    scanf("%d",selection) ;
+    switch (*selection)
     {
     case 1 :
-        printf("Player 1 VS Playr 2\n");
+        game_display();
         getchar();
         break;
     case 2 :
-        printf(" VS Computer\n");
+        game_display();
         getchar();
         break;
     case 3 :
         system("cls");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     default:
         system("cls");
         printf("invalid number ,please try again!!\n");
-        playMode_display();
+        playMode_display(selection);
         break;
     }
 }

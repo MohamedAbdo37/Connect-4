@@ -1,4 +1,4 @@
 
-void mainMenu(void);
+void mainMenu(int * selection);
 
-void playMode(void);
+void playMode(int * selection);
