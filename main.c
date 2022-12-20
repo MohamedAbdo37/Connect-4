@@ -12,7 +12,7 @@ void main(void){
     int width = 5 , hight = 6;
     char board[hight][width];
 
-    setIntialTime(time) ;
+    setIntialTime(time/CLOCKS_PER_SEC);
     setDimension(width,hight);
     setEmptyBoard(&board[0][0]);
 

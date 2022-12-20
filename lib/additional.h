@@ -1,6 +1,6 @@
 
 void timePassed();
 
-void setIntialTime(clock_t time)
+void setIntialTime(int time);
 
-void timeFormat(clock_t time)
+void timeFormat(int time);

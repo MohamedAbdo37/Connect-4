@@ -9,8 +9,7 @@ void mainMenu(int * selection)
     switch (*selection){
     case 1:
         system("cls");
-        playMode_display();
-        playMode();
+        playMode_display(selection);
         break;
     case 2:
          system("cls");
@@ -27,7 +26,7 @@ void mainMenu(int * selection)
     default:
         system("cls");
         printf("invalid number ,please try again!!\n");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     }
 

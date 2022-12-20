@@ -2,19 +2,18 @@
 #include <time.h>
 
 
-clock_t intial ;
+int intial ;
 
-void setIntialTime(clock_t time){
-    extern clock_t intial = time ;
+void setIntialTime(int time){
+    intial = time ;
 }
+
 void timePassed(){
-    clock_t time = clock() - intial ;
-    int sec = time /CLOCKS_PER_SEC ;
-    timeFormat(time);
+    clock_t time = clock() ;
+    int sec = (time/CLOCKS_PER_SEC) - intial ;
+    timeFormat(sec);
 }
 
 void timeFormat(int sec){
-    int min = sec/60 ;
-
-    printf("%d : %d",min,sec%60);  
+    printf("%d : %d",sec/60,sec%60);  
 }

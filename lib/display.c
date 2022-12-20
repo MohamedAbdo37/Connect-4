@@ -8,12 +8,12 @@ int hight = 7;
 char * cell ; 
 
 void setDimension(int x, int y){
-    extern int width = x;
-    extern int hight = y;
+    width = x;
+    hight = y;
 }
 
 void setEmptyBoard(char * array){
-    extern char * cell = array ;
+    cell = array ;
 
     for(int i = 0 ; i < width * hight ; i++)
        *(cell+i)= 32;
@@ -79,14 +79,11 @@ void playMode_display(int * s){
 
 void board_display(){
 
-    int x = width;
-    int y = hight;
-
     printf("\n\t\t|");
-    for(int i = 0 ; i< x * y ; i++){
-        if(i%x == 0 && i!= 0){
+    for(int i = 0 ; i< width * hight ; i++){
+        if(i%width == 0 && i!= 0){
             printf("\n\t\t");
-            for (int i=0;i<=4*x ;i++)
+            for (int i=0;i<=4*width ;i++)
                 printf("%c",205);
 
             printf("\n\t\t|");
@@ -95,22 +92,24 @@ void board_display(){
     }
     printf("\n\t\t");
     
-    for (int i=0;i<=4*x ;i++)
+    for (int i=0 ;i <= 4 * width ;i++)
                 printf("%c",205);
 
     printf("\n\t\t ");
 
-    for (int i=0;i<x ;i++)
+    for (int i=0;i<width ;i++)
         printf(" %d  ",i+1);
     printf("\n"); 
 
 }
 
 void game_display(int player_1 ,int player_2){
+    system("cls");
     printf("time\t");
     timePassed();
     printf("\nPlayer 1 : %d point\n",player_1);
     printf("\nPlayer 2 : %d point\n",player_2);
 
     board_display();
+    getchar();
 }

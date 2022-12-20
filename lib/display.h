@@ -5,7 +5,7 @@ void setEmptyBoard(char * array);
 
 void mainMenu_display(int * selection);
 
-void playMode_display(void);
+void playMode_display(int * selection);
 
 void board_display(char * board);
 
