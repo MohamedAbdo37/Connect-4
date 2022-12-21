@@ -119,23 +119,14 @@ void top_players_display(int * selection){
    }
 printf ("\n%c 1-Back\n",16);
 printf ("\n%c 2-Quit\n",16);
-if (getchar()==49){
-        system("cls");
-        mainMenu_display(selection);}
-else if (getchar()==50){
-         system("cls");
-        printf("See you soon!!");
-}}
+top_players_menu(*selection);
+}
 void load_display(int * selection){
     printf("%c Saved Game 1\n",16);
     printf("%c Saved Game 2\n",16);
     printf("%c Saved Game 3\n",16);
-if (getchar()==49){
-        system("cls");
-        mainMenu_display(selection);}
-else if (getchar()==50){
-         system("cls");
-        printf("See you soon!!");
-}
+    printf ("\n%c 1-Back\n",16);
+    printf ("%c 2-Quit\n",16);
+    load_menu(*selection);
 
 }
