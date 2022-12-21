@@ -117,14 +117,25 @@ void top_players_display(int * selection){
    for (int i=0;i<10;i++){
     printf("%c %d:\n-------------------------------\n",16,i+1);
    }
-    mainMenu_display(selection);
-
-    
-
-}
+printf ("\n%c 1-Back\n",16);
+printf ("\n%c 2-Quit\n",16);
+if (getchar()==49){
+        system("cls");
+        mainMenu_display(selection);}
+else if (getchar()==50){
+         system("cls");
+        printf("See you soon!!");
+}}
 void load_display(int * selection){
     printf("%c Saved Game 1\n",16);
     printf("%c Saved Game 2\n",16);
     printf("%c Saved Game 3\n",16);
-    mainMenu_display(selection);
+if (getchar()==49){
+        system("cls");
+        mainMenu_display(selection);}
+else if (getchar()==50){
+         system("cls");
+        printf("See you soon!!");
+}
+
 }

@@ -13,7 +13,7 @@ void mainMenu(int * selection)
         break;
     case 2:
         system("cls");
-        void load_display(selection);
+        load_display(selection);
         getchar();
         break;
     case 3:
