@@ -65,7 +65,7 @@ void load_menu (int * selection){
   switch (*selection)
   {
   case 1:
-        system "cls";
+        system ("cls");
         mainMenu_display(selection);
         break;
   case 2:
@@ -82,7 +82,7 @@ void load_menu (int * selection){
   switch (*selection)
   {
   case 1:
-        system "cls";
+        system ("cls");
         mainMenu_display(selection);
         break;
   case 2:
