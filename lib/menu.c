@@ -62,37 +62,37 @@ void playMode(int * selection){
 
 void load_menu (int * selection){
   scanf("%d",selection);
-  switch (*selection)
-  {
-  case 1:
+  switch (*selection){
+    case 1:
         system ("cls");
         mainMenu_display(selection);
         break;
-  case 2:
+    case 2:
         system("cls");
         printf("See you soon!!!");
         break;
-  default:
+    default:
         system("cls");
         printf("invalid number ,please try again!!\n");
         load_menu(selection);
-  }}
+    }
+  }
+  
   void top_players_menu(int * selection){
        scanf("%d",selection);
-  switch (*selection)
-  {
-  case 1:
+    switch (*selection){
+    case 1:
         system ("cls");
         mainMenu_display(selection);
         break;
-  case 2:
+    case 2:
         system("cls");
         printf("See you soon!!!");
         break;
-  default:
+    default:
         system("cls");
         printf("invalid number ,please try again!!\n");
         load_menu(selection);
-  }
+    }
   }
 
