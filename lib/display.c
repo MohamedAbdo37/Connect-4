@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "additional.h"
+#include "game.h"
 
 int width = 9;
 int hight = 7;
@@ -10,11 +11,14 @@ char * cell ;
 void setDimension(int x, int y){
     width = x;
     hight = y;
+
+    setRowsAndColumns(x,y);
 }
 
 void setEmptyBoard(char * array){
     cell = array ;
-
+    setCellPointer(array);
+    
     for(int i = 0 ; i < width * hight ; i++)
        *(cell+i)= 32;
 
@@ -103,16 +107,24 @@ void board_display(){
 
 }
 
-void game_display(int player_1 ,int player_2){
-    system("cls");
+void game_display(int player_1 ,int player_2,int move){
     printf("time\t");
     timePassed();
-    printf("\nPlayer 1 : %d point\n",player_1);
-    printf("\nPlayer 2 : %d point\n",player_2);
+    printf("\nMoves :");
+    printf("\nPlayer 1 : %4d \t",move);
+
+    if(move) printf("Player 2 : %4d \n",move-1);
+    else printf("Player 2 : 0 \n");
+
+    printf("\nScore :");
+    printf("\nPlayer 1 : %4d point\t",player_1);
+    printf("Player 2 : %4d point\n",player_2);
 
     board_display();
-    getchar();
+
 }
+
+
 void top_players_display(int * selection){
    for (int i=0;i<10;i++){
     printf("%c %d:\n-------------------------------\n",16,i+1);
@@ -121,6 +133,8 @@ printf ("\n%c 1-Back\n",16);
 printf ("\n%c 2-Quit\n",16);
 top_players_menu(selection);
 }
+
+
 void load_display(int * selection){
     printf("%c Saved Game 1\n",16);
     printf("%c Saved Game 2\n",16);

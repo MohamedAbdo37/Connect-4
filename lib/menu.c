@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "display.h"
+#include "game.h"
 
 void mainMenu(int * selection)
 {
@@ -41,12 +42,10 @@ void playMode(int * selection){
     switch (*selection)
     {
     case 1 :
-        game_display();
-        getchar();
+        game(selection);
         break;
     case 2 :
-        game_display();
-        getchar();
+        game(selection);
         break;
     case 3 :
         system("cls");
