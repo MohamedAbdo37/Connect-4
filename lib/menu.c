@@ -43,9 +43,11 @@ void playMode(int * selection){
     {
     case 1 :
         game(selection);
+        getchar();
         break;
     case 2 :
         game(selection);
+        getchar();
         break;
     case 3 :
         system("cls");

@@ -15,3 +15,13 @@ void player_2(int * selection);
 
 void game(int * selection);
 
+void verticalCheck(int i, int * score);
+
+void horizontalCheck(int i, int * score);
+
+void rightDiognalCheck(int i, int * score);
+
+void leftDiognalCheck(int i, int * score);
+
+void Score(int i , int * score);
+
