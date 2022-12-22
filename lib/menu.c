@@ -92,7 +92,7 @@ void load_menu (int * selection){
     default:
         system("cls");
         printf("invalid number ,please try again!!\n");
-        load_menu(selection);
+        top_players_menu(selection);
     }
   }
 

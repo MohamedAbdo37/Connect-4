@@ -119,7 +119,7 @@ void top_players_display(int * selection){
    }
 printf ("\n%c 1-Back\n",16);
 printf ("\n%c 2-Quit\n",16);
-top_players_menu(*selection);
+top_players_menu(selection);
 }
 void load_display(int * selection){
     printf("%c Saved Game 1\n",16);
@@ -127,6 +127,6 @@ void load_display(int * selection){
     printf("%c Saved Game 3\n",16);
     printf ("\n%c 1-Back\n",16);
     printf ("%c 2-Quit\n",16);
-    load_menu(*selection);
+    load_menu(selection);
 
 }
