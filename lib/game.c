@@ -17,7 +17,7 @@ void setCellPointer(char * i){
 }
 
 int checkcol (int col){
-   int place=col-1;
+   int place = col-1;
 
    while (place < (hight*width))
    {
@@ -25,7 +25,8 @@ int checkcol (int col){
             break;
         place += width;
    }
-   return place-1;
+
+   return place - width;
 }
 
 void addX(int col){
