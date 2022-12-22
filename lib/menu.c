@@ -72,9 +72,9 @@ void load_menu (int * selection){
         printf("See you soon!!!");
         break;
     default:
-        system("cls");
         printf("invalid number ,please try again!!\n");
         load_menu(selection);
+        break;
     }
   }
   
@@ -90,9 +90,9 @@ void load_menu (int * selection){
         printf("See you soon!!!");
         break;
     default:
-        system("cls");
         printf("invalid number ,please try again!!\n");
         top_players_menu(selection);
+        break;    
     }
   }
 
