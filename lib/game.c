@@ -3,7 +3,7 @@
 #include "display.h"
 
 char * cell;
-int hight , width ,move ;
+int hight , width ,move_1 ,move_2 ;
 int p1_score , p2_score ;
 
 
@@ -45,12 +45,14 @@ void player_1(int * col){
     printf("Player 1 choose a column");
     scanf("%d",col);
 
-    if (*col > 0 && *col < width){
+    if (*col > 0 && *col <= width){
         system("cls");
         addX(*col);
+        move_1++;
     }
     else{
-        printf("Invalid number ,Please try again");
+        system("cls");
+        printf("\n\"Invalid number ,Please try again!\"\n");
         void player_1(col);
     }
 }
@@ -63,9 +65,11 @@ void player_2(int * col){
     if (*col > 0 && *col <= width){
         system("cls");
         addO(*col);
+        move_2++;
     }
     else{
-        printf("Invalid number ,Please try again");
+        system("cls");
+        printf("\n\"Invalid number ,Please try again!\"\n");
         void player_2(col);
     }
 }
@@ -73,19 +77,19 @@ void player_2(int * col){
 void game(int * selection){
 
     system("cls");
-    move = 1 ;
-    while(move < (hight*width)+1){
 
-        game_display(p1_score,p2_score,move/2);
+    move_1 = 0 ;
+    move_2 = 0 ;
 
-        if(move%2){
-            player_2(selection);
-            move++;
-        }
-        else{
+    while( (move_1 + move_2) < (hight*width)){
+
+        game_display(p1_score,p2_score,move_1,move_2);
+
+        if((move_1 + move_2)%2 == 0)
             player_1(selection);
-            move++;
-        }
+
+        else
+            player_2(selection);
 
     }
 }

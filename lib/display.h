@@ -9,7 +9,7 @@ void playMode_display(int * selection);
 
 void board_display(char * board);
 
-void game_display(int player1_score,int player2_score,int move);
+void game_display(int player_1 ,int player_2,int move_1 ,int move_2);
 
 void top_players_display(int * selection);
 

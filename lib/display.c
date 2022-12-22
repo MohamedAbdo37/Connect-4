@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "menu.h"
 #include "additional.h"
 #include "game.h"
@@ -107,16 +108,18 @@ void board_display(){
 
 }
 
-void game_display(int player_1 ,int player_2,int move){
-    printf("time\t");
+void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
+
+    printf("\ntime\t");
     timePassed();
+    
     printf("\nMoves :");
-    printf("\nPlayer 1 : %4d \t",move);
 
-    if(move) printf("Player 2 : %4d \n",move-1);
-    else printf("Player 2 : 0 \n");
-
+    printf("\nPlayer 1 : %4d \t",move_1);
+    printf("Player 2 : %4d \n",move_2);
+    
     printf("\nScore :");
+
     printf("\nPlayer 1 : %4d point\t",player_1);
     printf("Player 2 : %4d point\n",player_2);
 
