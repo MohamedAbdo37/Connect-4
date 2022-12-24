@@ -67,7 +67,7 @@ void horizontalCheck(int i, int * s){
         i++ ;
         n++ ;
         if(j = 4){
-            n--;  
+            n--;
             break;
         }
     }
@@ -95,7 +95,7 @@ void rightDiognalCheck(int i, int * s){
     for(int j = 0 ; i<(1+i/width)*width  && *(cell + i+(width + 1)) == *(cell + i);j++){
         i+= (width + 1) ;
         n++ ;
-        if(j = 4){  
+        if(j = 4){
             break;
         }
     }
@@ -122,7 +122,7 @@ void leftDiognalCheck(int i, int * s){
         i-= (width - 1) ;
         n++ ;
         if(j != 4){
-            n--;  
+            n--;
             break;
         }
     }
@@ -140,40 +140,55 @@ void Score(int i , int * s){
 }
 
 void player_1(int * col){
+   int p;
     printf("Player 1 choose a column");
     scanf("%d",col);
-
+    if (*col==0){
+         undo(p);
+         move_2--;
+        system("cls");
+        game_display(p1_score,p2_score,move_1,move_2);
+         player_2(col);
+    }
+    else{
     if (*col > 0 && *col <= width){
         int i = checkcol(*col);
+        p=i;
         system("cls");
         addX(i);
         Score(i,(&p1_score));
         move_1++;
     }
     else{
-        system("cls");
         printf("\n\"Invalid number ,Please try again!\"\n");
         player_1(col);
-    }
+    }}
 }
 
 void player_2(int * col){
-
+    int p;
     printf("Player 2 choose a column");
     scanf("%d",col);
-
+    if (*col==0){
+         undo(p);
+         move_1--;
+         system("cls");
+         game_display(p1_score,p2_score,move_1,move_2);
+         player_1(col);
+    }
+    else{
     if (*col > 0 && *col <= width){
         int i = checkcol(*col);
+        p=i;
         system("cls");
         addO(i);
         Score(i,(&p2_score));
         move_2++;
     }
     else{
-        system("cls");
         printf("\n\"Invalid number ,Please try again!\"\n");
         player_2(col);
-    }
+    }}
 }
 
 void game(int * selection){
@@ -194,4 +209,8 @@ void game(int * selection){
             player_2(selection);
         }
     }
+}
+void undo (int p)
+{
+    *(cell+p)=32;
 }
