@@ -147,3 +147,37 @@ void load_display(int * selection){
     load_menu(selection);
 
 }
+int stack_arr[9*7];
+int top=-1;
+void push (int place)
+{
+    top++;
+    stack_arr[top]=place;
+}
+void undo (void)
+{
+    *(cell+stack_arr[top])=32;
+    pop();
+}
+int pop (void)
+{
+    int value = stack_arr[top];
+    top--;
+    return value;
+}
+void redo_1 (void)
+{
+    int newplace=pop();
+    top++;
+    push(newplace);
+    *(cell+stack_arr[top])=88;
+}
+void redo_2 (void)
+{
+    int newplace=pop();
+    top++;
+    push(newplace);
+    *(cell+stack_arr[top])=79;
+}
+
+

@@ -153,7 +153,7 @@ void player_1(int * col){
     printf("Player 1 choose a column");
     scanf("%d",col);
     if (*col==0){
-         undo(p);
+         undo();
          move_2--;
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
@@ -162,6 +162,7 @@ void player_1(int * col){
         else{
             if (*col > 0 && *col <= width){
             int i = checkcol(*col);
+            push(i);
             system("cls");
             addX(i);
             p1_score += Score(i);
@@ -181,15 +182,25 @@ void player_2(int * col){
     printf("Player 2 choose a column");
     scanf("%d",col);
     if (*col==0){
-         undo(p);
+         undo();
          move_1--;
          system("cls");
          game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);
     }
+    else if (*col==11)
+    {
+        redo_2();
+        move_2++;
+        system("cls");
+        game_display(p1_score,p2_score,move_1,move_2);
+         player_1(col);
+
+    }
     else{
         if (*col > 0 && *col <= width){
         int i = checkcol(*col);
+         push(i);
         system("cls");
         addO(i);
         p2_score += Score(i);
@@ -222,8 +233,4 @@ void game(int * selection){
             player_2(selection);
         }
     }
-}
-void undo (int p)
-{
-    *(cell+p)=32;
 }

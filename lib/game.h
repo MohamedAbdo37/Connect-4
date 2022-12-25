@@ -24,4 +24,3 @@ void rightDiognalCheck(int i, int * score);
 void leftDiognalCheck(int i, int * score);
 
 void Score(int i , int * score);
-void undo (int);
