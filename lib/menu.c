@@ -46,7 +46,7 @@ void playMode(int * selection){
         getchar();
         break;
     case 2 :
-        game(selection);
+        game_computer(selection);
         getchar();
         break;
     case 3 :

@@ -147,37 +147,37 @@ void load_display(int * selection){
     load_menu(selection);
 
 }
-int stack_arr[9*7];
-int top=-1;
-void push (int place)
+int stack_undo[9*7];
+int stack_redo[9*7];
+int top_undo=-1;
+int top_redo=63;
+void push_undo (int place)
 {
-    top++;
-    stack_arr[top]=place;
+    top_undo++;
+    stack_undo[top_undo]=place;
 }
 void undo (void)
 {
-    *(cell+stack_arr[top])=32;
-    pop();
+    *(cell+stack_undo[top_undo])=32;
+    push_redo(stack_undo[top_undo]);
+    top_undo--;
+
 }
-int pop (void)
+void push_redo (int place)
 {
-    int value = stack_arr[top];
-    top--;
-    return value;
+    top_redo--;
+    stack_redo[top_redo]=place;
 }
-void redo_1 (void)
+void redo (char ch) 
 {
-    int newplace=pop();
-    top++;
-    push(newplace);
-    *(cell+stack_arr[top])=88;
+    *(cell+stack_redo[top_redo])=ch;
+    push_undo(stack_redo[top_redo]);
+     top_redo++;
+    
 }
-void redo_2 (void)
-{
-    int newplace=pop();
-    top++;
-    push(newplace);
-    *(cell+stack_arr[top])=79;
-}
+
+
+
+
 
 

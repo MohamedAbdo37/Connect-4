@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "display.h"
 
 char * cell;
@@ -149,7 +150,6 @@ int Score(int i){
 }
 
 void player_1(int * col){
-   int p;
     printf("Player 1 choose a column");
     scanf("%d",col);
     if (*col==0){
@@ -159,10 +159,19 @@ void player_1(int * col){
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);
     }
+    else if (*col==11)
+    {
+        redo(88);
+        move_1++;
+        system("cls");
+        game_display(p1_score,p2_score,move_1,move_2);
+         player_2(col);
+
+    } 
         else{
             if (*col > 0 && *col <= width){
             int i = checkcol(*col);
-            push(i);
+            push_undo(i);
             system("cls");
             addX(i);
             p1_score += Score(i);
@@ -188,19 +197,19 @@ void player_2(int * col){
          game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);
     }
-    else if (*col==11)
+     else if (*col==11)
     {
-        redo_2();
+        redo(79);
         move_2++;
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);
 
-    }
+    } 
     else{
         if (*col > 0 && *col <= width){
         int i = checkcol(*col);
-         push(i);
+         push_undo(i);
         system("cls");
         addO(i);
         p2_score += Score(i);
@@ -234,3 +243,39 @@ void game(int * selection){
         }
     }
 }
+
+
+void game_computer (int * selection){
+
+    system("cls");
+
+    move_1 = 0 ;
+    move_2 = 0 ;
+
+    while( (move_1 + move_2) < (hight*width)){
+
+        game_display(p1_score,p2_score,move_1,move_2);
+
+        if((move_1 + move_2)%2 == 0){
+            player_1(selection);
+        }
+        else{
+            computer(selection);
+        }
+    }
+}
+
+void computer (int * col)
+{
+     srand(time(NULL));
+    *col = (rand() % (5-1+1)) + 1;
+     int i = checkcol(*col);
+     push_undo(i);
+     system("cls");
+     addO(i);
+     p2_score += Score(i);
+     move_2++;
+    
+}
+
+

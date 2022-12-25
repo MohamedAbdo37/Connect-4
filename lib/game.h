@@ -24,3 +24,5 @@ void rightDiognalCheck(int i, int * score);
 void leftDiognalCheck(int i, int * score);
 
 void Score(int i , int * score);
+void computer (int * col);
+void game_computer (int * selection);

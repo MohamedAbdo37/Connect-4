@@ -16,10 +16,11 @@ void top_players_display(int * selection);
 void load_display(int * selection);
 
 
-void push (int);
+void push_undo (int);
 void undo (void);
-int pop (void);
-void redo_1 (void);
-void redo_2 (void);
+void push_redo (int );
+void redo (char);
+
+
 
 
