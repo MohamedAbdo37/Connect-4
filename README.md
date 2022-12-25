@@ -5,4 +5,9 @@
 
 
 ## it's just a test fo rehected push
+<<<<<<< HEAD
 #dwfkjsnf
+=======
+# test
+## test
+>>>>>>> 5310a4f ( test)
