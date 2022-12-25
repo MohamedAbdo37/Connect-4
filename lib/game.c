@@ -38,21 +38,23 @@ void addO(int p){
 }
 
 
-void verticalCheck(int i, int *s){
+int verticalCheck(int i){
 
-    for (int j = 2; (i < (hight * width)) && *cell + i + width == *cell + i;j++){
+    int s;
+    for (int j = 2; i < (hight * width) && (*(cell + i) == *(cell + i + width));j++){
         i+= width ;
         if(j == 4){
-            *s++;
+            s++;
             break;
         }
     }
+    return s;
 }
 
-void horizontalCheck(int i, int * s){
-    int p = i , n = 0 ;
+int horizontalCheck(int i){
+    int p = i , n = 0 ,s = 0;
 
-    for(int j = 0 ; i >= (p/width)*width && *(cell + i-1) == *(cell + i);j++){
+    for(int j = 1 ; i - 1 >= (p/width)*width && *(cell + i-1) == *(cell + i);j++){
         i-- ;
         n++ ;
         if(j == 3){
@@ -62,81 +64,88 @@ void horizontalCheck(int i, int * s){
     }
 
     i = p ;
+    n++;
 
-    for(int j = 0 ; i<(1+p/width)*width  && *(cell + i+1) == *(cell + i);j++){
+    for(int j = 1 ; i+1<(1+p/width)*width  && *(cell + i+1) == *(cell + i);j++){
         i++ ;
         n++ ;
-        if(j = 4){
-            n--;
+        if(j == 3){
             break;
         }
     }
 
     if(n/4)
-        *s += (n-3);
+        s += (n-3);
 
+    return s;
 }
 
-void rightDiognalCheck(int i, int * s){
+int rightDiognalCheck(int i){
 
-    int p = i ,n = 0;
+    int p = i ,n = 0 , s = 0;
 
-    for(int j = 0 ; i >= (i/width)*width && *(cell + i - (width+1)) == *(cell + i);j++){
+    for(int j = 1 ; i >= (i/width)*width && *(cell + i - (width+1)) == *(cell + i);j++){
         i-= (width + 1) ;
         n++;
-        if(j = 4){
-            n-- ;
+        if(j == 3){
             break;
         }
-    }
-
-   i = p ;
-
-    for(int j = 0 ; i<(1+i/width)*width  && *(cell + i+(width + 1)) == *(cell + i);j++){
-        i+= (width + 1) ;
-        n++ ;
-        if(j = 4){
-            break;
-        }
-    }
-
-    if(n/4)
-        *s += (n-3);
-}
-
-
-void leftDiognalCheck(int i, int * s){
-
-    int p = i ,n = 0 ;
-
-    for(int j = 0; i >= (i/width)*width && *(cell + i + (width - 1)) == *(cell + i);j++){
-        i+= (width - 1) ;
-        n++ ;
-        if(j != 4)
-            break;
     }
 
     i = p ;
-
-    for(int j = 0; i<(1+i/width)*width  && *(cell + i- (width - 1)) == *(cell + i);j++){
-        i-= (width - 1) ;
+    n++ ;
+    for(int j = 1 ; i<(1+i/width)*width  && *(cell + i+(width + 1)) == *(cell + i);j++){
+        i+= (width + 1) ;
         n++ ;
-        if(j != 4){
-            n--;
+        if(j == 3){ 
             break;
         }
     }
 
     if(n/4)
-        *s += (n-3);
+        s += (n-3);
+    
+    return s ;
 }
 
 
-void Score(int i , int * s){
-    verticalCheck(i,s);
-    horizontalCheck(i,s);
-    rightDiognalCheck(i,s);
-    leftDiognalCheck(i,s);
+int leftDiognalCheck(int i){
+
+    int p = i ,n = 0 ,s = 0;
+
+    for(int j = 1; i >= (i/width)*width && *(cell + i + (width - 1)) == *(cell + i);j++){
+        i+= (width - 1) ;
+        if(j == 3){
+            break;
+        }
+        n++ ;
+    }
+
+    i = p ;
+    n++ ;
+
+    for(int j = 1 ; i <(1+i/width)*width  && *(cell + i- (width - 1)) == *(cell + i);j++){
+        i-= (width - 1) ;
+        if(j == 3){ 
+            break;
+        }
+        n++ ;
+    }
+
+    if(n/4)
+        s += (n-3);
+    
+    return s;
+}
+
+
+int Score(int i){
+    int s = 0 ;
+    s += verticalCheck(i);
+    s += horizontalCheck(i);
+    s += rightDiognalCheck(i);
+    s += leftDiognalCheck(i);
+    return s ;
 }
 
 void player_1(int * col){
@@ -150,19 +159,21 @@ void player_1(int * col){
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);
     }
-    else{
-    if (*col > 0 && *col <= width){
-        int i = checkcol(*col);
-        p=i;
-        system("cls");
-        addX(i);
-        Score(i,(&p1_score));
-        move_1++;
+        else{
+            if (*col > 0 && *col <= width){
+            int i = checkcol(*col);
+            system("cls");
+            addX(i);
+            p1_score += Score(i);
+            move_1++;
+        }
+        else{
+            system("cls");
+            game_display(p1_score,p2_score,move_1,move_2);
+            printf("\n\"Invalid number ,Please try again!\"\n");
+            player_1(col);
+        }
     }
-    else{
-        printf("\n\"Invalid number ,Please try again!\"\n");
-        player_1(col);
-    }}
 }
 
 void player_2(int * col){
@@ -177,18 +188,20 @@ void player_2(int * col){
          player_1(col);
     }
     else{
-    if (*col > 0 && *col <= width){
+        if (*col > 0 && *col <= width){
         int i = checkcol(*col);
-        p=i;
         system("cls");
         addO(i);
-        Score(i,(&p2_score));
+        p2_score += Score(i);
         move_2++;
     }
     else{
+        system("cls");
+        game_display(p1_score,p2_score,move_1,move_2);
         printf("\n\"Invalid number ,Please try again!\"\n");
         player_2(col);
-    }}
+    }
+    }
 }
 
 void game(int * selection){
