@@ -1,4 +1,4 @@
-
+void color(int);
 void setDimension(int width, int hight);
 
 void setEmptyBoard(char * array);

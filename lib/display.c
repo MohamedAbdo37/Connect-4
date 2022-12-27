@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <windows.h>
 #include "menu.h"
 #include "additional.h"
 #include "game.h"
@@ -8,6 +8,12 @@
 int width = 9;
 int hight = 7;
 char * cell ;
+
+void color(int value)
+{
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,value);
+}
 
 void setDimension(int x, int y){
     width = x;
@@ -19,7 +25,7 @@ void setDimension(int x, int y){
 void setEmptyBoard(char * array){
     cell = array ;
     setCellPointer(array);
-    
+
     for(int i = 0 ; i < width * hight ; i++)
        *(cell+i)= 32;
 
@@ -83,7 +89,7 @@ void playMode_display(int * s){
 }
 
 void board_display(){
-
+    color(0x01);
     printf("\n\t\t|");
     for(int i = 0 ; i< width * hight ; i++){
         if(i%width == 0 && i!= 0){
@@ -93,7 +99,18 @@ void board_display(){
 
             printf("\n\t\t|");
         }
-        printf(" %c |",*(cell+i));
+        if (*(cell+i)==88){
+        color(0x04);
+        printf(" %c",*(cell+i));}
+        else if (*(cell+i)==79){
+        color(0x06);
+        printf(" %c",*(cell+i));}
+        else {
+            printf(" %c",*(cell+i));
+        }
+
+        color(0x01);
+        printf(" |");
     }
     printf("\n\t\t");
 
@@ -101,6 +118,7 @@ void board_display(){
                 printf("%c",205);
 
     printf("\n\t\t ");
+    color(0x07);
 
     for (int i=0;i<width ;i++)
         printf(" %d  ",i+1);
@@ -109,15 +127,16 @@ void board_display(){
 }
 
 void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
+    color(0x07);
 
     printf("\ntime\t");
     timePassed();
-    
+
     printf("\nMoves :");
 
     printf("\nPlayer 1 : %4d \t",move_1);
     printf("Player 2 : %4d \n",move_2);
-    
+
     printf("\nScore :");
 
     printf("\nPlayer 1 : %4d point\t",player_1);
@@ -168,12 +187,12 @@ void push_redo (int place)
     top_redo--;
     stack_redo[top_redo]=place;
 }
-void redo (char ch) 
+void redo (char ch)
 {
     *(cell+stack_redo[top_redo])=ch;
     push_undo(stack_redo[top_redo]);
      top_redo++;
-    
+
 }
 
 

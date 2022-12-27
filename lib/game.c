@@ -40,103 +40,83 @@ void addO(int p){
 
 
 int verticalCheck(int i){
-
-    int s;
-    for (int j = 2; i < (hight * width) && (*(cell + i) == *(cell + i + width));j++){
-        i+= width ;
-        if(j == 4){
-            s++;
-            break;
-        }
+    int s=0,j=0;
+    while (i<(hight * width)){
+    if (*(cell+i)==*(cell+i+width))
+    {
+        j++;
+        i+=width;
     }
+    else
+    {
+        break;
+        i+=width;
+    }}
+    if (j>=3){
+    s++;}
     return s;
 }
 
 int horizontalCheck(int i){
-    int p = i , n = 0 ,s = 0;
-
-    for(int j = 1 ; i - 1 >= (p/width)*width && *(cell + i-1) == *(cell + i);j++){
-        i-- ;
-        n++ ;
-        if(j == 3){
-            break;
-        }
-
+    int s = 0 , j=0;
+    while (i<(hight * width)){
+    if (*(cell + i)==*(cell+i-1))
+    {
+        j++;
+        i--;
     }
-
-    i = p ;
-    n++;
-
-    for(int j = 1 ; i+1<(1+p/width)*width  && *(cell + i+1) == *(cell + i);j++){
-        i++ ;
-        n++ ;
-        if(j == 3){
+    else
+    {
+        break;
+        i--;
+    }
+    }
+    if (j>=3){
+    s++;}
+    return s;
+    }
+int rightDiognalCheck(int i){
+    int s=0,j=0;
+    while (i<(hight * width))
+    {
+        if (*(cell+i)==*(cell+i+(width-1)))
+        {
+            j++;
+            i+=(width-1);
+        }
+        else
+        {
             break;
+            i+=(width-1);
         }
     }
-
-    if(n/4)
-        s += (n-3);
-
+    if (j>=3){
+        s++;
+    }
     return s;
 }
 
-int rightDiognalCheck(int i){
-
-    int p = i ,n = 0 , s = 0;
-
-    for(int j = 1 ; i >= (i/width)*width && *(cell + i - (width+1)) == *(cell + i);j++){
-        i-= (width + 1) ;
-        n++;
-        if(j == 3){
-            break;
-        }
-    }
-
-    i = p ;
-    n++ ;
-    for(int j = 1 ; i<(1+i/width)*width  && *(cell + i+(width + 1)) == *(cell + i);j++){
-        i+= (width + 1) ;
-        n++ ;
-        if(j == 3){ 
-            break;
-        }
-    }
-
-    if(n/4)
-        s += (n-3);
-    
-    return s ;
-}
 
 
 int leftDiognalCheck(int i){
-
-    int p = i ,n = 0 ,s = 0;
-
-    for(int j = 1; i >= (i/width)*width && *(cell + i + (width - 1)) == *(cell + i);j++){
-        i+= (width - 1) ;
-        if(j == 3){
-            break;
-        }
-        n++ ;
+int s=0,j=0;
+while (i<(hight*width))
+{
+    if (*(cell+i)==*(cell+i+(width+1)))
+    {
+        j++;
+        i+=(width+1);
     }
-
-    i = p ;
-    n++ ;
-
-    for(int j = 1 ; i <(1+i/width)*width  && *(cell + i- (width - 1)) == *(cell + i);j++){
-        i-= (width - 1) ;
-        if(j == 3){ 
-            break;
-        }
-        n++ ;
+    else
+    {
+        break;
+        i+=(width+1);
     }
-
-    if(n/4)
-        s += (n-3);
-    
-    return s;
+}
+if (j>=3){
+    s++;
+}
+return s;
 }
 
 
@@ -150,6 +130,7 @@ int Score(int i){
 }
 
 void player_1(int * col){
+    color(0x04);
     printf("Player 1 choose a column");
     scanf("%d",col);
     if (*col==0){
@@ -167,7 +148,7 @@ void player_1(int * col){
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);
 
-    } 
+    }
         else{
             if (*col > 0 && *col <= width){
             int i = checkcol(*col);
@@ -187,7 +168,7 @@ void player_1(int * col){
 }
 
 void player_2(int * col){
-    int p;
+    color(0x06);
     printf("Player 2 choose a column");
     scanf("%d",col);
     if (*col==0){
@@ -205,7 +186,7 @@ void player_2(int * col){
         game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);
 
-    } 
+    }
     else{
         if (*col > 0 && *col <= width){
         int i = checkcol(*col);
@@ -275,7 +256,7 @@ void computer (int * col)
      addO(i);
      p2_score += Score(i);
      move_2++;
-    
+
 }
 
 
