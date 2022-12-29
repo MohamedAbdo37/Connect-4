@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "display.h"
+#include "additional.h"
 
 char * cell;
 int hight , width ,move_1 ,move_2 ;
@@ -170,9 +171,10 @@ void push_undo (int place)
 }
 void undo (void)
 {
+    if (top_undo!=-1){
     *(cell+stack_undo[top_undo])=32;
     push_redo(stack_undo[top_undo]);
-    top_undo--;
+    top_undo--;}
 
 }
 void push_redo (int place)
@@ -195,6 +197,7 @@ void player_1(int * col){
     if (*col==0){
          undo();
          move_2--;
+         p2_score=Score(stack_undo[top_undo]);
          if (move_2 < 0 )
          {
              system("cls");
@@ -214,6 +217,7 @@ void player_1(int * col){
         {
         redo(88);
         move_1++;
+        p1_score=Score(stack_redo[top_redo]);
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);}
@@ -228,6 +232,7 @@ void player_1(int * col){
             if (*col > 0 && *col <= width){
             int i = checkcol(*col);
             push_undo(i);
+            top_redo=63;
             system("cls");
             addX(i);
             p1_score += Score(i);
@@ -249,6 +254,7 @@ void player_2(int * col){
     if (*col==0){
          undo();
          move_1--;
+         p1_score=Score(stack_undo[top_undo]);
          if (move_1 < 0 )
          {
              system("cls");
@@ -268,6 +274,7 @@ void player_2(int * col){
          {
         redo(79);
         move_2++;
+        p2_score=Score(stack_redo[top_redo]);
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);}
@@ -283,6 +290,7 @@ void player_2(int * col){
         if (*col > 0 && *col <= width){
         int i = checkcol(*col);
          push_undo(i);
+         top_redo=63;
         system("cls");
         addO(i);
         p2_score += Score(i);
@@ -331,6 +339,7 @@ void game(int * selection){
             fptr = fopen("high score.txt","a");
             fprintf(fptr,"%s %d\n",name,p1_score);
             fclose(fptr);
+            sort_file();
         }
         else if (p1_score < p2_score)
         {
@@ -346,6 +355,7 @@ void game(int * selection){
             fptr = fopen("high score.txt","a");
             fprintf(fptr,"%s %d\n",name,p1_score);
             fclose(fptr);
+            sort_file();
 
         }
         else

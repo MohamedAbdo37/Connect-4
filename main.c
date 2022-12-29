@@ -21,11 +21,7 @@ void main(void){
     setSelection(&selectoin);
     setEmptyBoard(&board[0][0]);
 
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 6b54a8503eb8cac95926e16fd66a2d6615c4ec96
     mainMenu_display(&selectoin);
 
 }
