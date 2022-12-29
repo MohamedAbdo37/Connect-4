@@ -108,6 +108,7 @@ void load_menu (int * selection){
     case 2:
         system("cls");
         printf("See you soon!!!");
+        Sleep(10000);
         break;
     default:
         printf("invalid number ,please try again!!\n");
