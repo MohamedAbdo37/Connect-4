@@ -254,6 +254,39 @@ void game(int * selection){
             player_2(selection);
         }
     }
+    if ((move_1 + move_2) ==(hight*width))
+    {
+        if (p1_score > p2_score)
+        {
+            game_display(p1_score,p2_score,move_1,move_2);
+            color(0x07);
+            printf("Player 1 please enter your name...\n");
+            char name[50];
+            fflush(stdin);
+            gets(name);
+            color(0x04);
+            printf("%s is the winner %c",name,2);
+        }
+        else if (p1_score < p2_score)
+        {
+            game_display(p1_score,p2_score,move_1,move_2);
+            color(0x07);
+            printf("Player 2 please enter your name...\n");
+            char name[50];
+            fflush(stdin);
+            gets(name);
+            color(0x06);
+            printf("%s is the winner %c",name,2);
+
+        }
+        else
+        {
+            game_display(p1_score,p2_score,move_1,move_2);
+            color(0x08);
+            printf("The Game is DRAW!!!!");
+            sleep(1000);
+        }
+    }
 }
 
 
