@@ -18,14 +18,13 @@ void main(void){
     char board[hight][width];
     setPath(path);
 
-    readXml(&width,&hight,&highScore);
-
-    
     setIntialTime(time/CLOCKS_PER_SEC);
-    setDimension(width,hight,highScore);
     setSelection(&selectoin);
     setEmptyBoard(&board[0][0]);
 
+    //xmlPath_display();
+    //readXml(&width,&hight,&highScore);
+    setDimension(width,hight,highScore);
     mainMenu_display(&selectoin);
 
 }

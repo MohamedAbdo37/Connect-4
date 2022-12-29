@@ -223,7 +223,7 @@ void xmlPath_display(){
 
 
     for (int i=0;i<1;i++){
-        printf("%c                                   ",186);
+        printf("%c                                            ",186);
         printf("%c\n",186);
     }
     printf("%c",200);
@@ -236,7 +236,18 @@ void xmlPath_display(){
     xmlPath(selection);
 }
 
+void enterPath(char * path){
+   // printf("%c 1-Back\n",16);
+   // printf("%c 2-Quit\n",16);
 
+    printf("Enter Path:\n");
+    scanf("%s",path);
 
+    /*if(*path == '1'){
+        xmlPath_display();
+    }
 
-
+    if(*path == '2'){
+        exit(0);
+    }*/   
+}

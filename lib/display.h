@@ -21,6 +21,8 @@ void load_display(int * selection);
 
 void xmlPath_display();
 
+void enterPath(char * path);
+
 
 
 

@@ -118,9 +118,11 @@ void load_menu (int * selection){
   }
 
 void xmlPath(int * selection ){
-
+    scanf("%d",selection);
     switch (*selection){
     case 1:
+        system("cls");
+        enterPath(path);
         fgets(path,261,stdin);
         checkpath(path);
         system("cls");
