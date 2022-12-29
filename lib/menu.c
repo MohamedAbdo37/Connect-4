@@ -38,11 +38,7 @@ void mainMenu(int * selection)
         break;
     case 3:
         system("cls");
-<<<<<<< HEAD
-        top_players(selection);
-=======
         top_players_display(selection);
->>>>>>> 6b54a8503eb8cac95926e16fd66a2d6615c4ec96
         break;
     case 4:
         system("cls");
@@ -133,8 +129,7 @@ void xmlPath(int * selection ){
         system("cls");
         break ;
     case 3 :
-        setDimension(7,9);
-        // put here function that set the size of highscore list
+        setDimension(7,9,10);
         system("cls");
         mainMenu_display(selection);
         break;

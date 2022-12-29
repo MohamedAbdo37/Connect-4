@@ -163,6 +163,7 @@ int stack_undo[9*7];
 int stack_redo[9*7];
 int top_undo=-1;
 int top_redo=63;
+
 void push_undo (int place)
 {
     top_undo++;

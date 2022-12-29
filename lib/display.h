@@ -2,7 +2,7 @@ void color(int);
 
 void setSelection(int * selection);
 
-void setDimension(int width, int hight);
+void setDimension(int width, int hight , int highScore);
 
 void setEmptyBoard(char * array);
 

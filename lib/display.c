@@ -5,8 +5,7 @@
 #include "additional.h"
 #include "game.h"
 
-int width = 9;
-int hight = 7;
+int width = 9, hight = 7 , highScore = 10;
 char * cell ;
 int * selection ;
 
@@ -21,10 +20,10 @@ void color(int value)
     SetConsoleTextAttribute(H,value);
 }
 
-void setDimension(int x, int y){
+void setDimension(int x, int y,int h){
     width = x;
     hight = y;
-
+    highScore = h;
     setRowsAndColumns(x,y);
 }
 
@@ -151,43 +150,45 @@ void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
     board_display();
 
 }
-void top_players(selection){
-struct player{
-	char name[50];
-	int score;
-}pla[200];
-	struct player temp;
-	FILE *fptr;
-	int i=0,size,j;
-	fptr=fopen("high score.txt","r");
-	if(fptr==NULL)
-	{
-	printf("\n Cannot open the file \n");
-	exit(0);
-	}
-	while(fgetc(fptr)!=EOF)
-	{
-	fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
-	i++;
-	}
-	size=i-1;
-	for(i=0;i<size;i++)
-	for(j=i+1;j<size+1;j++)
-	if(pla[i].score <pla[j].score)
-	{
-	temp=pla[i];
-	pla[i]=pla[j];
-	pla[j]=temp;
-	}
-	fclose(fptr);
-	for(i=0;i<size+1;i++)
-	printf("%s : %d\n",pla[i].name,pla[i].score);
 
-top_players_display(selection);
+
+void top_players(selection){
+    struct player{
+        char name[50];
+        int score;
+    }
+
+    pla[200];
+    struct player temp;
+    FILE *fptr;
+    int i=0,size,j;
+    fptr=fopen("high score.txt","r");
+
+    if(fptr==NULL){
+        printf("\n Cannot open the file \n");
+        exit(0);
+    }
+    while(fgetc(fptr)!=EOF){
+        fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
+        i++;
+    }
+    size=i-1;
+    for(i=0;i<size;i++)
+    for(j=i+1;j<size+1;j++)
+        if(pla[i].score <pla[j].score){
+            temp=pla[i];
+            pla[i]=pla[j];
+            pla[j]=temp;
+        }
+
+    fclose(fptr);
+    for(i=0;i<highScore;i++)
+    printf("%s : %d\n",pla[i].name,pla[i].score);
+
+    top_players_display(selection);
 }
 
-void top_players_display (int *selection)
-{
+void top_players_display (int *selection){
     printf("\n");
     printf("%c1-Back\n",16);
     printf("%c2-Quit\n",16);
