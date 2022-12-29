@@ -30,17 +30,15 @@ void mainMenu(int * selection)
     switch (*selection){
     case 1:
         system("cls");
-        playMode_display();
+        playMode_display(selection);
         break;
     case 2:
         system("cls");
-        load_display();
-        getchar();
+        load_display(selection);
         break;
     case 3:
         system("cls");
-        top_players_display();
-        getchar();
+        top_players_display(selection);
         break;
     case 4:
         system("cls");
@@ -51,7 +49,7 @@ void mainMenu(int * selection)
     default:
         system("cls");
         printf("invalid number ,please try again!!\n");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     }
 
@@ -71,12 +69,12 @@ void playMode(int * selection){
         break;
     case 3 :
         system("cls");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     default:
         system("cls");
         printf("invalid number ,please try again!!\n");
-        playMode_display();
+        playMode_display(selection);
         break;
     }
 }
@@ -86,7 +84,7 @@ void load_menu (int * selection){
   switch (*selection){
     case 1:
         system ("cls");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     case 2:
         system("cls");
@@ -104,7 +102,7 @@ void load_menu (int * selection){
     switch (*selection){
     case 1:
         system ("cls");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     case 2:
         system("cls");
@@ -134,7 +132,7 @@ void xmlPath(int * selection ){
         setDimension(7,9);
         // put here function that set the size of highscore list
         system("cls");
-        mainMenu_display();
+        mainMenu_display(selection);
         break;
     case 4:
         Sleep(1000);

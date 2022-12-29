@@ -27,6 +27,6 @@ void main(void){
     setEmptyBoard(&board[0][0]);
 
     
-    mainMenu_display();
+    mainMenu_display(&selectoin);
 
 }
