@@ -113,7 +113,7 @@ int rightDiognalCheck(int i){
 
     if(n/4)
         s += (n-3);
-    
+
     return s;
 }
 
@@ -145,7 +145,7 @@ int leftDiognalCheck(int i){
 
     if(n/4)
         s += (n-3);
-    
+
     return s;
 }
 
@@ -159,6 +159,35 @@ int Score(int i){
     return s ;
 }
 
+int stack_undo[9*7];
+int stack_redo[9*7];
+int top_undo=-1;
+int top_redo=63;
+void push_undo (int place)
+{
+    top_undo++;
+    stack_undo[top_undo]=place;
+}
+void undo (void)
+{
+    *(cell+stack_undo[top_undo])=32;
+    push_redo(stack_undo[top_undo]);
+    top_undo--;
+
+}
+void push_redo (int place)
+{
+    top_redo--;
+    stack_redo[top_redo]=place;
+}
+void redo (char ch)
+{
+    *(cell+stack_redo[top_redo])=ch;
+    push_undo(stack_redo[top_redo]);
+     top_redo++;
+
+}
+
 void player_1(int * col){
     color(0x04);
     printf("Player 1 choose a column");
@@ -166,19 +195,35 @@ void player_1(int * col){
     if (*col==0){
          undo();
          move_2--;
+         if (move_2 < 0 )
+         {
+             system("cls");
+             move_2++;
+             printf("No thing to undo!!");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_1(col);
+         }
+         else{
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col);
+         player_2(col);}
     }
     else if (*col==11)
     {
+        if (top_redo!=63)
+        {
         redo(88);
         move_1++;
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col);
+         player_2(col);}
+         else{
+            system("cls");
+            printf("No thing to Redo");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_1(col);}
 
-    }
+         }
         else{
             if (*col > 0 && *col <= width){
             int i = checkcol(*col);
@@ -194,8 +239,8 @@ void player_1(int * col){
             printf("\n\"Invalid number ,Please try again!\"\n");
             player_1(col);
         }
-    }
-}
+    }}
+
 
 void player_2(int * col){
     color(0x06);
@@ -204,17 +249,34 @@ void player_2(int * col){
     if (*col==0){
          undo();
          move_1--;
+         if (move_1 < 0 )
+         {
+             system("cls");
+             move_1++;
+            printf("No thing to undo!!");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_2(col);
+         }
+         else{
          system("cls");
          game_display(p1_score,p2_score,move_1,move_2);
-         player_1(col);
+         player_1(col);}
     }
      else if (*col==11)
     {
+         if (top_redo!=63)
+         {
         redo(79);
         move_2++;
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
-         player_1(col);
+         player_1(col);}
+         else
+         {
+            system("cls");
+            printf("No thing to Redo");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_2(col);}
 
     }
     else{
@@ -265,6 +327,10 @@ void game(int * selection){
             gets(name);
             color(0x04);
             printf("%s is the winner %c",name,2);
+            FILE * fptr;
+            fptr = fopen("high score.txt","a");
+            fprintf(fptr,"%s %d\n",name,p1_score);
+            fclose(fptr);
         }
         else if (p1_score < p2_score)
         {
@@ -276,6 +342,10 @@ void game(int * selection){
             gets(name);
             color(0x06);
             printf("%s is the winner %c",name,2);
+            FILE * fptr;
+            fptr = fopen("high score.txt","a");
+            fprintf(fptr,"%s %d\n",name,p1_score);
+            fclose(fptr);
 
         }
         else

@@ -151,19 +151,51 @@ void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
     board_display();
 
 }
+void top_players(selection){
+struct player{
+	char name[50];
+	int score;
+}pla[200];
+	struct player temp;
+	FILE *fptr;
+	int i=0,size,j;
+	fptr=fopen("high score.txt","r");
+	if(fptr==NULL)
+	{
+	printf("\n Cannot open the file \n");
+	exit(0);
+	}
+	while(fgetc(fptr)!=EOF)
+	{
+	fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
+	i++;
+	}
+	size=i-1;
+	for(i=0;i<size;i++)
+	for(j=i+1;j<size+1;j++)
+	if(pla[i].score <pla[j].score)
+	{
+	temp=pla[i];
+	pla[i]=pla[j];
+	pla[j]=temp;
+	}
+	fclose(fptr);
+	for(i=0;i<size+1;i++)
+	printf("%s : %d\n",pla[i].name,pla[i].score);
 
+top_players_display(selection);
+}
 
-void top_players_display(){
-   for (int i=0;i<10;i++){
-    printf("%c %d:\n-------------------------------\n",16,i+1);
-   }
-printf ("\n%c 1-Back\n",16);
-printf ("\n%c 2-Quit\n",16);
-top_players_menu(selection);
+void top_players_display (int *selection)
+{
+    printf("\n");
+    printf("%c1-Back\n",16);
+    printf("%c2-Quit\n",16);
+    top_players_menu(selection);
 }
 
 
-void load_display(){
+void load_display(int*selection){
     printf("%c Saved Game 1\n",16);
     printf("%c Saved Game 2\n",16);
     printf("%c Saved Game 3\n",16);
@@ -172,34 +204,7 @@ void load_display(){
     load_menu(selection);
 
 }
-int stack_undo[9*7];
-int stack_redo[9*7];
-int top_undo=-1;
-int top_redo=63;
-void push_undo (int place)
-{
-    top_undo++;
-    stack_undo[top_undo]=place;
-}
-void undo (void)
-{
-    *(cell+stack_undo[top_undo])=32;
-    push_redo(stack_undo[top_undo]);
-    top_undo--;
 
-}
-void push_redo (int place)
-{
-    top_redo--;
-    stack_redo[top_redo]=place;
-}
-void redo (char ch)
-{
-    *(cell+stack_redo[top_redo])=ch;
-    push_undo(stack_redo[top_redo]);
-     top_redo++;
-
-}
 
 void xmlPath_display(){
 

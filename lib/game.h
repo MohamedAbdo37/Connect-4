@@ -26,3 +26,8 @@ void leftDiognalCheck(int i, int * score);
 void Score(int i , int * score);
 void computer (int * col);
 void game_computer (int * selection);
+void push_undo (int);
+void undo (void);
+void push_redo (int );
+void redo (char);
+
