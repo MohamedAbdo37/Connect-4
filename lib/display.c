@@ -8,6 +8,12 @@
 int width = 9;
 int hight = 7;
 char * cell ;
+int * selection ;
+
+void setSelection(int *s){
+    selection = s ;
+}
+
 
 void color(int value)
 {
@@ -31,7 +37,7 @@ void setEmptyBoard(char * array){
 
 }
 
-void mainMenu_display(int * selection){
+void mainMenu_display(){
 
     printf("%c",201);
 
@@ -147,7 +153,7 @@ void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
 }
 
 
-void top_players_display(int * selection){
+void top_players_display(){
    for (int i=0;i<10;i++){
     printf("%c %d:\n-------------------------------\n",16,i+1);
    }
@@ -157,7 +163,7 @@ top_players_menu(selection);
 }
 
 
-void load_display(int * selection){
+void load_display(){
     printf("%c Saved Game 1\n",16);
     printf("%c Saved Game 2\n",16);
     printf("%c Saved Game 3\n",16);
@@ -195,6 +201,34 @@ void redo (char ch)
 
 }
 
+void xmlPath_display(){
+
+    printf("%c",201);
+
+    for (int i=0;i<35+9;i++)
+        printf("%c",205);
+
+    printf("%c\n",187);
+
+    printf("%c         %c 1-Enter Path                     %c\n",186,16,186);
+    printf("%c         %c 2-Use difulte path               %c\n",186,16,186);
+    printf("%c         %c 3-Use difulte configurations     %c\n",186,16,186);
+    printf("%c         %c 4-Quit                           %c\n",186,16,186);
+
+
+    for (int i=0;i<1;i++){
+        printf("%c                                   ",186);
+        printf("%c\n",186);
+    }
+    printf("%c",200);
+
+    for (int i=0;i<35+9;i++)
+        printf("%c",205);
+
+    printf("%c\n",188);
+    printf("%c ",16);
+    xmlPath(selection);
+}
 
 
 

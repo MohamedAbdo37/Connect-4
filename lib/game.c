@@ -7,7 +7,6 @@ char * cell;
 int hight , width ,move_1 ,move_2 ;
 int p1_score , p2_score ;
 
-
 void setRowsAndColumns(int x , int y){
     hight = y;
     width = x;

@@ -1,4 +1,7 @@
 void color(int);
+
+void setSelection(int * selection)
+
 void setDimension(int width, int hight);
 
 void setEmptyBoard(char * array);
@@ -15,6 +18,7 @@ void top_players_display(int * selection);
 
 void load_display(int * selection);
 
+void xmlPath_display(char * selection);
 
 void push_undo (int);
 void undo (void);
