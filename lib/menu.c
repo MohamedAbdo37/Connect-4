@@ -12,7 +12,7 @@ void setPath(char * p){
     path = p ;
 }
 
-void checkpath(char * p , int *s){
+void checkpath(char * p ){
     FILE *  fx = fopen( p , "r");
     if(fx == NULL){
         fclose(fx);
@@ -62,11 +62,11 @@ void playMode(int * selection){
     switch (*selection)
     {
     case 1 :
-        game();
+        game(selection);
         getchar();
         break;
     case 2 :
-        game_computer();
+        game_computer(selection);
         getchar();
         break;
     case 3 :
@@ -94,7 +94,7 @@ void load_menu (int * selection){
         break;
     default:
         printf("invalid number ,please try again!!\n");
-        load_menu();
+        load_menu(selection);
         break;
     }
   }
@@ -112,7 +112,7 @@ void load_menu (int * selection){
         break;
     default:
         printf("invalid number ,please try again!!\n");
-        top_players_menu();
+        top_players_menu(selection);
         break;    
     }
   }

@@ -21,8 +21,6 @@ void main(void){
     fgets(path,261,stdin);
     
 
-    printf();
-
     setIntialTime(time/CLOCKS_PER_SEC);
     setDimension(width,hight);
     setSelection(&selectoin);
