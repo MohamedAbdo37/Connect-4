@@ -38,6 +38,7 @@ void mainMenu(int * selection)
         break;
     case 3:
         system("cls");
+        top_players(selection);
         top_players_display(selection);
         break;
     case 4:
