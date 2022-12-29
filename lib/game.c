@@ -38,85 +38,116 @@ void addO(int p){
     *(cell+p) = 79;
 }
 
+int checkPosition(int x , int y){
+    if(x>-1 && x < width)
+        if(y>-1 && y < hight)
+            return 1;
+    return 0 ;
+}
 
 int verticalCheck(int i){
-    int s=0,j=0;
-    while (i<(hight * width)){
-    if (*(cell+i)==*(cell+i+width))
-    {
-        j++;
-        i+=width;
+    int s = 0;
+    for (int j = 2; i < (hight * width) && (*(cell + i) == *(cell + i + width));j++){
+        i+= width ;
+        if(j == 4){
+            s++;
+            break;
+        }
     }
-    else
-    {
-        break;
-        i+=width;
-    }}
-    if (j>=3){
-    s++;}
     return s;
 }
 
 int horizontalCheck(int i){
-    int s = 0 , j=0;
-    while (i<(hight * width)){
-    if (*(cell + i)==*(cell+i-1))
-    {
-        j++;
-        i--;
-    }
-    else
-    {
-        break;
-        i--;
-    }
-    }
-    if (j>=3){
-    s++;}
-    return s;
-    }
-int rightDiognalCheck(int i){
-    int s=0,j=0;
-    while (i<(hight * width))
-    {
-        if (*(cell+i)==*(cell+i+(width-1)))
-        {
-            j++;
-            i+=(width-1);
-        }
-        else
-        {
+    int p = i , n = 0 ,s = 0;
+
+    for(int j = 1 ; i - 1 >= (p/width)*width && *(cell + i-1) == *(cell + i);j++){
+        i-- ;
+        n++ ;
+        if(j == 3){
             break;
-            i+=(width-1);
+        }
+
+    }
+
+    i = p ;
+    n++;
+
+    for(int j = 1 ; i+1<(1+p/width)*width  && *(cell + i+1) == *(cell + i);j++){
+        i++ ;
+        n++ ;
+        if(j == 3){
+            break;
         }
     }
-    if (j>=3){
-        s++;
-    }
+
+    if(n/4)
+        s += (n-3);
+
     return s;
 }
 
+int rightDiognalCheck(int i){
+
+    int s = 0 ,n = 1 ;
+    int x = i%width ,y = i/width;
+
+   for(int j = 2; checkPosition(x-1,y+1) && *(cell +i) == *(cell + x-1 +(y+1)*width);j++){
+        n++;
+        x--;
+        y++;
+        if(j == 4){
+            break;
+        }
+    }
+
+    x = i % width ;
+    y = i / width ;
+
+    for(int j = 2; checkPosition(x+1,y-1) && *(cell +i) == *(cell + x+1 +(y-1)*width);j++){
+        n++;
+        x++;
+        y--;
+        if(j == 4){
+            break;
+        }
+    }
+
+    if(n/4)
+        s += (n-3);
+    
+    return s;
+}
 
 
 int leftDiognalCheck(int i){
-int s=0,j=0;
-while (i<(hight*width))
-{
-    if (*(cell+i)==*(cell+i+(width+1)))
-    {
-        j++;
-        i+=(width+1);
+    int s = 0 ,n = 1 ;
+    int x = i%width ,y = i/width;
+
+   for(int j = 2; checkPosition(x+1,y+1) && *(cell +i) == *(cell + x+1 +(y+1)*width);j++){
+        n++;
+        x++;
+        y++;
+        if(j == 4){
+            break;
+        }
     }
-    else
-    {
-        break;
-        i+=(width+1);
+
+    x = i % width ;
+    y = i / width ;
+
+    for(int j = 2; checkPosition(x-1,y-1) && *(cell +i) == *(cell + x-1 +(y-1)*width);j++){
+        n++;
+        x--;
+        y--;
+        if(j == 4){
+            break;
+        }
     }
-}
-if (j>=3){
-    s++;
-}
-return s;
+
+    if(n/4)
+        s += (n-3);
+    
+    return s;
 }
 
 
