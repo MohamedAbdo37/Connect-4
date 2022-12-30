@@ -7,14 +7,21 @@
 char * cell;
 int hight , width ,move_1 ,move_2 ;
 int p1_score , p2_score ;
+int * stack_undo;
+int * stack_redo;
+int top_undo = -1;
+int top_redo = 63;
 
 void setRowsAndColumns(int x , int y){
     hight = y;
     width = x;
 }
 
-void setCellPointer(char * i){
+void setCellPointer(char * i,int * u, int *r){
+    stack_redo = r;
+    stack_undo = u; 
     cell = i ;
+    top_redo = (width*hight);
 }
 
 int checkcol (int col){
@@ -160,10 +167,6 @@ int Score(int i){
     return s ;
 }
 
-int stack_undo[9*7];
-int stack_redo[9*7];
-int top_undo=-1;
-int top_redo = 63;
 
 void push_undo (int place)
 {
@@ -199,7 +202,7 @@ void player_1(int * col){
     if (*col==0 ){
             if(top_undo != -1)
                 p2_score -=Score(stack_undo[top_undo]);
-                
+
             undo();
             move_2--;
             
@@ -221,13 +224,15 @@ void player_1(int * col){
     {
         if (top_redo!=63)
         {
-            p1_score +=Score(stack_redo[top_redo]);
+            
             redo(88);
             move_1++;
-        
-        system("cls");
-        game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col);}
+            p1_score +=Score(stack_redo[top_redo-1]);
+
+            system("cls");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_2(col);
+         }
          else{
             system("cls");
             printf("No thing to Redo");
@@ -284,10 +289,11 @@ void player_2(int * col){
     {
          if (top_redo!=63)
          {
-            p2_score +=Score(stack_redo[top_redo]);
+            
             redo(79);
             move_2++;
-            
+            p2_score +=Score(stack_redo[top_redo-1]);
+
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);}

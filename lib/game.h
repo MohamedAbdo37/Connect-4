@@ -1,7 +1,7 @@
 
 void setRowsAndColumns(int width , int hight);
 
-void setCellPointer(char * i);
+void setCellPointer(char * i,int * u, int *r);
 
 int checkcol (int column_number);
 

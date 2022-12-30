@@ -4,7 +4,7 @@ void setSelection(int * selection);
 
 void setDimension(int width, int hight , int highScore);
 
-void setEmptyBoard(char * array);
+void setEmptyBoard(char * array,int * u, int * r);
 
 void mainMenu_display(int * selection);
 
