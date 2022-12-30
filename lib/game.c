@@ -25,16 +25,28 @@ void setCellPointer(char * i,int * u, int *r){
 }
 
 int checkcol (int col){
-   int place = col-1;
 
-   while (place < (hight*width))
-   {
-        if (*(cell+place)!=32)
-            break;
-        place += width;
-   }
+    if(*(cell+col-1) != 32){
+        system("cls");
+        printf("The column is full !!");
+        game_display(p1_score,p2_score,move_1,move_2);
+        return -5 ;
+    }
+    else{
 
-   return place - width;
+        int place = col-1;
+
+        while (place < (hight*width))
+        {
+                if (*(cell+place)!=32)
+                    break;
+                place += width;
+        }
+
+        return place - width;
+    }
+
+    
 }
 
 void addX(int p){
@@ -195,7 +207,9 @@ void redo (char ch)
 }
 
 void player_1(int * col){
+    int i = -5 ;
     char in[5]= "";
+pl1:
     color(0x04);
     printf("Player 1 choose a column\n%c",16);
     *col = scan(&in[0]);
@@ -207,8 +221,7 @@ void player_1(int * col){
             move_2--;
             
          
-         if (move_2 < 0 )
-         {
+         if (top_undo == -1){
              system("cls");
              move_2++;
              printf("No thing to undo!!");
@@ -222,7 +235,7 @@ void player_1(int * col){
     }
     else if (*col==-1)
     {
-        if (top_redo!=63)
+        if (top_redo!=(hight * width))
         {
             
             redo(88);
@@ -242,7 +255,9 @@ void player_1(int * col){
          }
         else{
             if (*col > 0 && *col <= width){
-            int i = checkcol(*col);
+            i = checkcol(*col);
+            if(i == -5)
+                goto pl1;
             push_undo(i);
             top_redo=63;
             system("cls");
@@ -260,7 +275,10 @@ void player_1(int * col){
 
 
 void player_2(int * col){
+    int i = -5 ;
     char  in[5] = "";
+
+pl2:
     color(0x06);
     printf("Player 2 choose a column\n%c",16);
     *col = scan(&in[0]);
@@ -287,7 +305,7 @@ void player_2(int * col){
     }
      else if (*col==-1)
     {
-         if (top_redo!=63)
+         if (top_redo!=(hight * width))
          {
             
             redo(79);
@@ -307,7 +325,10 @@ void player_2(int * col){
     }
     else{
         if (*col > 0 && *col <= width){
-        int i = checkcol(*col);
+        i = checkcol(*col);
+        if(i == -5){
+            goto pl2;
+        }
          push_undo(i);
          top_redo=63;
         system("cls");
@@ -437,15 +458,21 @@ void game_computer (int * selection){
 }
 
 void computer (int * col)
-{
-     srand(time(NULL));
-    *col = (rand() % (width-1+1)) + 1;
-     int i = checkcol(*col);
-     push_undo(i);
-     system("cls");
-     addO(i);
-     p2_score += Score(i);
-     move_2++;
+{   
+    int i = -5;
+    *col = 0;
+    srand(time(NULL));
+    while(i == -5){
+        while (*col==0){
+            *col = (rand() % (width)) + 1;
+        }
+        i = checkcol(*col);
+    }
+    push_undo(i);
+    system("cls");
+    addO(i);
+    p2_score += Score(i);
+    move_2++;
 
 }
 
