@@ -28,7 +28,6 @@ void setDimension(int x, int y,int h){
 }
 
 void setEmptyBoard(char * array){
-    cell = array ;
     setCellPointer(array);
 
     for(int i = 0 ; i < width * hight ; i++)
@@ -207,7 +206,7 @@ void load_display(int*selection){
 }
 
 
-void xmlPath_display(){
+void xmlPath_display(char * path){
 
     printf("%c",201);
 
@@ -233,21 +232,14 @@ void xmlPath_display(){
 
     printf("%c\n",188);
     printf("%c ",16);
-    xmlPath(selection);
+    xmlPath(selection,path);
 }
 
 void enterPath(char * path){
-   // printf("%c 1-Back\n",16);
-   // printf("%c 2-Quit\n",16);
+    printf("%c 1-Back\n",16);
+     printf("%c 2-Quit\n",16);
 
     printf("Enter Path:\n");
-    scanf("%s",path);
+    fgets(path,250,stdin);
 
-    /*if(*path == '1'){
-        xmlPath_display();
-    }
-
-    if(*path == '2'){
-        exit(0);
-    }*/   
 }

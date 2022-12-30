@@ -19,7 +19,7 @@ void top_players_display(int * selection);
 
 void load_display(int * selection);
 
-void xmlPath_display();
+void xmlPath_display(char * path);
 
 void enterPath(char * path);
 

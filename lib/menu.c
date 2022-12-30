@@ -6,21 +6,39 @@
 #include "display.h"
 #include "game.h"
 
-char * path;
+int x,y,z;
 
-void setPath(char * p){
-    path = p ;
+void setArgsXml(int width,int higth,int highScore){
+    x = width;
+    y = higth;
+    z = highScore;
 }
 
-void checkpath(char * p ){
-    FILE *  fx = fopen( p , "r");
-    if(fx == NULL){
-        fclose(fx);
-        printf("File errorm , program can't read it!\n");
-        Sleep(1000);
+void setArgs(int * width,int * higth,int *highScore){
+    *width = x;
+    *higth = y;
+    *highScore = z;
+}
+
+void checkpath(char *path){
+    
+    if(!strcmp(path,"1")){
         system("cls");
-        xmlPath_display();
+        xmlPath_display(path);
     }
+    if(!strcmp(path,"2"))
+        exit(0);
+
+    FILE *  fx = fopen(path, "r");
+
+    if(fx == NULL){
+        printf("File error , program can't read it!\n");
+        Sleep(3000);
+        fclose(fx);
+        system("cls");
+        xmlPath_display(path);
+    }
+    else    printf("T");
     fclose(fx);
 }
 
@@ -117,34 +135,39 @@ void load_menu (int * selection){
     }
   }
 
-void xmlPath(int * selection ){
+void xmlPath(int * selection ,char *path){
     scanf("%d",selection);
     switch (*selection){
     case 1:
         system("cls");
         enterPath(path);
-        fgets(path,261,stdin);
+        gets(path);
         checkpath(path);
+        readXml(path);
         system("cls");
+
+        return;
         break;
     case 2:
-        strcpy(path,"data/Configurations.xml");
+        strcpy(path,"data\\Configurations.xml");
         checkpath(path);
+        readXml(path);
         system("cls");
+        return;
         break ;
     case 3 :
-        setDimension(7,9,10);
+        x = 9;
+        y = 7;
+        z = 10;
         system("cls");
-        mainMenu_display(selection);
         break;
     case 4:
-        Sleep(1000);
         exit(0);
         break;
     default:
         system("cls");
         printf("invalid number ,please try again!!\n");
-        xmlPath_display();
+        xmlPath_display(path);
         break;
     }
 
