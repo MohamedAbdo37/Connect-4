@@ -73,7 +73,7 @@ void playMode_display(int * s){
 
     printf("%c\n",187);
 
-    printf("%c         %c 1-Player 1 VS Playr 2   %c\n",186,16,186);
+    printf("%c         %c 1-Player   VS Player    %c\n",186,16,186);
     printf("%c         %c 2-VS Computer           %c\n",186,16,186);
     printf("%c         %c 3-Main menu             %c\n",186,16,186);
 
@@ -216,11 +216,11 @@ void top_players_display (int *selection){
 
 
 void load_display(int*selection){
-    printf("%c Saved Game 1\n",16);
-    printf("%c Saved Game 2\n",16);
-    printf("%c Saved Game 3\n",16);
-    printf ("\n%c 1-Back\n",16);
-    printf ("%c 2-Quit\n",16);
+    printf("%c1_Saved Game 1\n",16);
+    printf("%c2_Saved Game 2\n",16);
+    printf("%c3_Saved Game 3\n",16);
+    printf ("%c4-Back\n",16);
+    printf ("%c5-Quit\n",16);
     load_menu(selection);
 
 }
@@ -236,8 +236,8 @@ void xmlPath_display(char * path){
     printf("%c\n",187);
 
     printf("%c         %c 1-Enter Path                     %c\n",186,16,186);
-    printf("%c         %c 2-Use difulte path               %c\n",186,16,186);
-    printf("%c         %c 3-Use difulte configurations     %c\n",186,16,186);
+    printf("%c         %c 2-Use default path               %c\n",186,16,186);
+    printf("%c         %c 3-Use default configurations     %c\n",186,16,186);
     printf("%c         %c 4-Quit                           %c\n",186,16,186);
 
 

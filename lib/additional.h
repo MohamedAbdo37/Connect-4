@@ -21,3 +21,5 @@ int scan(char * input);
     , the number that user has inputed
     and -4 if nothing above happend
 */
+
+

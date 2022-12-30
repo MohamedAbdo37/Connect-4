@@ -21,7 +21,7 @@ void setArgs(int * width,int * higth,int *highScore){
 }
 
 void checkpath(char *path){
-    
+
     if(!strcmp(path,"1")){
         system("cls");
         xmlPath_display(path);
@@ -98,23 +98,7 @@ void playMode(int * selection){
     }
 }
 
-void load_menu (int * selection){
-  scanf("%d",selection);
-  switch (*selection){
-    case 1:
-        system ("cls");
-        mainMenu_display(selection);
-        break;
-    case 2:
-        system("cls");
-        printf("See you soon!!!");
-        break;
-    default:
-        printf("invalid number ,please try again!!\n");
-        load_display(selection);
-        break;
-    }
-  }
+
 
   void top_players_menu(int * selection){
        scanf("%d",selection);
