@@ -168,11 +168,11 @@ void top_players(selection){
         printf("\n Cannot open the file \n");
         exit(0);
     }
-    while(fgetc(fptr)!=EOF){
+    while(!feof(fptr)){
         fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
         i++;
     }
-    size=i-1;
+    size=i;
     for(i=0;i<size;i++)
     for(j=i+1;j<size+1;j++)
         if(pla[i].score <pla[j].score){
@@ -182,7 +182,7 @@ void top_players(selection){
         }
 
     fclose(fptr);
-    for(i=0;i<highScore;i++)
+    for(i=0;i<size;i++)
     printf("%s : %d\n",pla[i].name,pla[i].score);
 
     top_players_display(selection);
@@ -249,5 +249,5 @@ void enterPath(char * path){
 
     if(*path == '2'){
         exit(0);
-    }*/   
+    }*/
 }

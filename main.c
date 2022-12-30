@@ -12,7 +12,7 @@ void main(void){
 
     clock_t time = clock();
     
-    int width = 9 , hight = 7 , highScore =10;
+    int width = 5 , hight = 6 , highScore =10;
     char path[262] ;
     int selectoin;
     char board[hight][width];

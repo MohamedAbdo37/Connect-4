@@ -6,3 +6,4 @@ void setIntialTime(int time);
 void timeFormat(int time);
 
 void sort_file (void);
+void check_existence(char name[50],int);
