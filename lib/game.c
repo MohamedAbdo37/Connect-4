@@ -227,19 +227,12 @@ void player_1(int * col){
             
             redo(88);
             move_1++;
-<<<<<<< HEAD
-
-        system("cls");
-        game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col);}
-=======
             p1_score +=Score(stack_redo[top_redo-1]);
 
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
             player_2(col);
          }
->>>>>>> 60eb67b8a5776ffa8669f32c659ad17aadff6ef3
          else{
             system("cls");
             printf("No thing to Redo");
@@ -302,10 +295,7 @@ void player_2(int * col){
             
             redo(79);
             move_2++;
-<<<<<<< HEAD
-=======
             p2_score +=Score(stack_redo[top_redo-1]);
->>>>>>> 60eb67b8a5776ffa8669f32c659ad17aadff6ef3
 
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
