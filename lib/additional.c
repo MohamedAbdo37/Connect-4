@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
+#include <ctype.h>
 
 #include "menu.h"
 #include "display.h"
@@ -27,7 +29,7 @@ void sort_file (void){
 		char name[50];
 		int score;
 	}
-	
+
 	pla[200];
 	struct player temp;
 	FILE *fptr;
@@ -38,7 +40,7 @@ void sort_file (void){
 		printf("\n Cannot open the file \n");
 		exit(0);
 	}
-		while(fgetc(fptr)!=EOF)
+		while(!feof(fptr))
 		{
 		fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
 		i++;
@@ -54,10 +56,10 @@ void sort_file (void){
 		}
 		fclose(fptr);
 		fptr = fopen("high score.txt","w");
-		fprintf(fptr,"\n");
-		for (i=0;i<size;i++){
+		for (i=0;i<size-1;i++){
 		fprintf(fptr,"%s %d",pla[i].name,pla[i].score);
-		fprintf(fptr,"\n");
+		if (i!=size-2)
+            fprintf(fptr,"\n");
 		}
 		fclose(fptr);
 }
@@ -123,6 +125,55 @@ void readXml(char * path){
 	setArgsXml(width,hight,highScore);
 
 }
+void check_existence(char name[50],int score)
+{
+    struct player{
+		char name[50];
+		int score;
+	}
+	pla[200];
+	FILE *fptr;
+	int i=0,size,truth=0;
+	fptr=fopen("high score.txt","r");
+	if(fptr==NULL){
+		printf("\n Cannot open the file \n");
+		exit(0);
+	}
+		while(!feof(fptr))
+		{
+		fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
+		i++;
+		}
+		size=i;
+        for(i=0;i<size;i++)
+        {
+            if (strcmp(pla[i].name,name)==0)
+            {
+                truth=1;
+                if (score > pla[i].score){
+                pla[i].score=score;
+                break;}
+            }
+        }
+        fclose(fptr);
+        if (truth==1){
+        fptr = fopen("high score.txt","w");
+		for (i=0;i<size+1;i++){
+		fprintf(fptr,"%s %d",pla[i].name,pla[i].score);
+		if (i!=size)
+            fprintf(fptr,"\n");
+		}
+            fclose(fptr);
+		}
+        else
+        {
+            fptr=fopen("high score.txt","a");
+            fprintf(fptr,"%s %d\n",name,score);
+            fclose(fptr);
+        }
+
+}
+
 
 
 

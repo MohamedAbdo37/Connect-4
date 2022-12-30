@@ -336,10 +336,7 @@ void game(int * selection){
             gets(name);
             color(0x04);
             printf("%s is the winner %c",name,2);
-            FILE * fptr;
-            fptr = fopen("high score.txt","a");
-            fprintf(fptr,"%s %d\n",name,p1_score);
-            fclose(fptr);
+            check_existence(name,p1_score);
             sort_file();
         }
         else if (p1_score < p2_score)
@@ -352,10 +349,7 @@ void game(int * selection){
             gets(name);
             color(0x06);
             printf("%s is the winner %c",name,2);
-            FILE * fptr;
-            fptr = fopen("high score.txt","a");
-            fprintf(fptr,"%s %d\n",name,p1_score);
-            fclose(fptr);
+            check_existence(name,p2_score);
             sort_file();
 
         }
@@ -388,12 +382,45 @@ void game_computer (int * selection){
             computer(selection);
         }
     }
+     if ((move_1 + move_2) ==(hight*width))
+    {
+        if (p1_score > p2_score)
+        {
+            game_display(p1_score,p2_score,move_1,move_2);
+            color(0x07);
+            printf("Player 1 please enter your name...\n");
+            char name[50];
+            fflush(stdin);
+            gets(name);
+            color(0x04);
+            printf("%s is the winner %c",name,2);
+            check_existence(name,p1_score);
+            sort_file();
+        }
+           else if (p1_score < p2_score)
+        {
+            game_display(p1_score,p2_score,move_1,move_2);
+            color(0x07);
+            printf("GAME OVER...!!\n");
+            getchar();
+
+        }
+        else
+        {
+            game_display(p1_score,p2_score,move_1,move_2);
+            color(0x08);
+            printf("The Game is DRAW!!!!");
+            getchar();
+        }
+    }
+
+
 }
 
 void computer (int * col)
 {
      srand(time(NULL));
-    *col = (rand() % (5-1+1)) + 1;
+    *col = (rand() % (width-1+1)) + 1;
      int i = checkcol(*col);
      push_undo(i);
      system("cls");
