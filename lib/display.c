@@ -27,9 +27,10 @@ void setDimension(int x, int y,int h){
     setRowsAndColumns(x,y);
 }
 
-void setEmptyBoard(char * array){
-    setCellPointer(array);
+void setEmptyBoard(char * array,int * u, int * r){
+    setCellPointer(array, u, r);
     cell = array ;
+
     for(int i = 0 ; i < width * hight ; i++)
        *(cell+i)= 32;
 

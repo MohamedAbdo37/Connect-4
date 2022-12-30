@@ -10,7 +10,7 @@ void main(void){
 
     clock_t time = clock();
     
-    int width = 5 , hight = 6 , highScore =10;
+    int width = 9 , hight = 7 , highScore =10;
     char path[262] ;
     int selectoin;
     
@@ -22,12 +22,11 @@ void main(void){
     xmlPath_display(path);
     setArgs(&width,&hight,&highScore);
 
-    //int stack_undo[width*hight];
-    //int stack_redo[width * hight];
-   // int top_redo = (width*hight);
+    int stack_undo[width*hight];
+    int stack_redo[width * hight];
     char board[hight][width];
 
-    setEmptyBoard(&board[0][0]);
+    setEmptyBoard(&board[0][0],&stack_undo[0],&stack_redo[0]);
     mainMenu_display(&selectoin);
 
 }
