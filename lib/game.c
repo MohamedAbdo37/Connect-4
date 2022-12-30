@@ -196,10 +196,12 @@ void player_1(int * col){
     color(0x04);
     printf("Player 1 choose a column\n%c",16);
     *col = scan(&in[0]);
-    if (*col==0 && top_undo != -1 ){
+    if (*col==0 ){
+            if(top_undo != -1){
             p2_score -=Score(stack_undo[top_undo]);
             undo();
             move_2--;
+            }
          
          if (move_2 < 0 )
          {
@@ -256,10 +258,12 @@ void player_2(int * col){
     color(0x06);
     printf("Player 2 choose a column\n%c",16);
     *col = scan(&in[0]);
-    if (*col==0 && top_undo != -1 ){
-            p1_score -=Score(stack_undo[top_undo]);
-            undo();
-            move_1--;
+    if (*col==0  ){
+            if(top_undo != -1){
+                p1_score -=Score(stack_undo[top_undo]);
+                undo();
+                move_1--;
+            }
          
          if (move_1 < 0 )
          {
@@ -274,7 +278,7 @@ void player_2(int * col){
          game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);}
     }
-     else if (*col==11)
+     else if (*col==-1)
     {
          if (top_redo!=63)
          {
