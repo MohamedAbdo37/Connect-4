@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+
 #include "menu.h"
 #include "additional.h"
 #include "game.h"
@@ -73,7 +74,7 @@ void playMode_display(int * s){
 
     printf("%c\n",187);
 
-    printf("%c         %c 1-Player   VS Player    %c\n",186,16,186);
+    printf("%c         %c 1-Player VS Player      %c\n",186,16,186);
     printf("%c         %c 2-VS Computer           %c\n",186,16,186);
     printf("%c         %c 3-Main menu             %c\n",186,16,186);
 
@@ -139,6 +140,7 @@ void board_display(){
 }
 
 void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
+
     color(0x07);
 
     printf("\ntime\t");

@@ -279,7 +279,7 @@ pl1:
 
 
 void player_2(int * col){
-    int i = -5 ;
+
     char  in[5] = "";
 
 pl2:
@@ -298,14 +298,16 @@ pl2:
          {
              system("cls");
              move_1++;
+           
             printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
             player_2(col);
          }
          else{
-         system("cls");
-         game_display(p1_score,p2_score,move_1,move_2);
-         player_1(col);}
+            system("cls");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_1(col);
+         }
     }
      else if (*col==-1)
     {
@@ -332,6 +334,7 @@ pl2:
             save_game();
      }
     else{
+        int i = -5 ;
         if (*col > 0 && *col <= width){
         i = checkcol(*col);
         if(i == -5){
@@ -486,7 +489,7 @@ void computer (int * col)
 void save_game(void)
 {
     FILE * fptr;
-    fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\saved games.bin","wb");
+    fptr = fopen("data\\saved games.bin","wb");
     fwrite(&move_1,sizeof(int),1,fptr);
     fwrite(&move_2,sizeof(int),1,fptr);
     fwrite(&p1_score,sizeof(int),1,fptr);
@@ -499,7 +502,7 @@ void save_game(void)
 void load_game(void)
 {
     FILE * fptr;
-    fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\saved games.bin","rb");
+    fptr = fopen("data\\saved games.bin","rb");
     if(fptr==NULL){
 		printf("\n Cannot open the file \n");
 		exit(0);
@@ -558,4 +561,3 @@ void load_menu (int * selection){
 
 
 
-// انا عايز انتحر

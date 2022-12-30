@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "lib/menu.h"
 #include "lib/display.h"
 #include "lib/additional.h"
 
 void main(void){
+    system("mode 800");
 
     clock_t time = clock();
     
