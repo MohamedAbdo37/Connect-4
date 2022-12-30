@@ -221,7 +221,7 @@ pl1:
             move_2--;
             
          
-         if (move_2 < 0 )
+         if (top_undo == -1)
          {
              system("cls");
              move_2++;
@@ -294,7 +294,7 @@ pl2:
             move_1--;
 
 
-         if (move_1 < 0 )
+         if (top_undo ==  -1 )
          {
              system("cls");
              move_1++;
@@ -316,9 +316,9 @@ pl2:
             move_2++;
             p2_score +=Score(stack_redo[top_redo-1]);
 
-        system("cls");
-        game_display(p1_score,p2_score,move_1,move_2);
-         player_1(col);}
+             system("cls");
+            game_display(p1_score,p2_score,move_1,move_2);
+            player_1(col);}
          else
          {
             system("cls");
