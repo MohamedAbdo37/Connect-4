@@ -19,7 +19,7 @@ void setRowsAndColumns(int x , int y){
 
 void setCellPointer(char * i,int * u, int *r){
     stack_redo = r;
-    stack_undo = u; 
+    stack_undo = u;
     cell = i ;
     top_redo = (width*hight);
 }
@@ -46,7 +46,7 @@ int checkcol (int col){
         return place - width;
     }
 
-    
+
 }
 
 void addX(int p){
@@ -206,7 +206,7 @@ void redo (char ch)
 
 }
 
-void player_1(int * col){
+void player_1(int * col , int *selection){
     int i = -5 ;
     char in[5]= "";
 pl1:
@@ -219,43 +219,50 @@ pl1:
 
             undo();
             move_2--;
-            
-         
+
+
          if (top_undo == -1)
          {
              system("cls");
              move_2++;
              printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col);
+            player_1(col,selection);
          }
          else{
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col);}
+         player_2(col,selection);}
     }
     else if (*col==-1)
     {
         if (top_redo!=(hight * width))
         {
-            
+
             redo(88);
             move_1++;
             p1_score +=Score(stack_redo[top_redo-1]);
 
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col);
+            player_2(col,selection);
          }
          else{
             system("cls");
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col);}
+            player_1(col,selection);}
          }
      else if (*col==-2){
             system("cls");
             save_game();
+            mainMenu_display(selection);
+     }
+      else if (*col==-3){
+       system("cls");
+       printf("See you soon...\n");
+       sleep(1000);
+
      }
         else{
             if (*col > 0 && *col <= width){
@@ -273,12 +280,12 @@ pl1:
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
             printf("\n\"Invalid number ,Please try again!\"\n");
-            player_1(col);
+            player_1(col,selection);
         }
     }}
 
 
-void player_2(int * col){
+void player_2(int * col , int *selection){
     int i = -5 ;
     char  in[5] = "";
 
@@ -296,40 +303,47 @@ pl2:
 
          if (top_undo ==  -1 )
          {
-             system("cls");
-             move_1++;
+            system("cls");
+            move_1++;
             printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col);
+            player_2(col,selection);
          }
          else{
          system("cls");
          game_display(p1_score,p2_score,move_1,move_2);
-         player_1(col);}
+         player_1(col,selection);}
     }
      else if (*col==-1)
     {
          if (top_redo!=(hight * width))
          {
-            
+
             redo(79);
             move_2++;
             p2_score +=Score(stack_redo[top_redo-1]);
 
              system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col);}
+            player_1(col,selection);}
          else
          {
             system("cls");
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col);}
+            player_2(col,selection);}
 
     }
       else if (*col==-2){
             system("cls");
             save_game();
+            mainMenu_display(selection);
+     }
+     else if (*col==-3){
+       system("cls");
+       printf("See you soon...\n");
+       sleep(1000);
+
      }
     else{
         if (*col > 0 && *col <= width){
@@ -348,7 +362,7 @@ pl2:
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
         printf("\n\"Invalid number ,Please try again!\"\n");
-        player_2(col);
+        player_2(col,selection);
     }
     }
 }
@@ -462,7 +476,7 @@ void game_computer (int * selection){
 }
 
 void computer (int * col)
-{   
+{
     int i = -5;
     *col = 0;
     srand(time(NULL));
