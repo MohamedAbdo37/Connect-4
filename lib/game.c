@@ -5,7 +5,7 @@
 #include "additional.h"
 
 char * cell;
-int hight , width ,move_1 ,move_2 ;
+int hight , width ,move_1=0 ,move_2=0 ;
 int p1_score , p2_score ;
 
 void setRowsAndColumns(int x , int y){
@@ -199,11 +199,11 @@ void player_1(int * col){
     if (*col==0 ){
             if(top_undo != -1)
                 p2_score -=Score(stack_undo[top_undo]);
-                
+
             undo();
             move_2--;
-            
-         
+
+
          if (move_2 < 0 )
          {
              system("cls");
@@ -224,7 +224,7 @@ void player_1(int * col){
             p1_score +=Score(stack_redo[top_redo]);
             redo(88);
             move_1++;
-        
+
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);}
@@ -233,8 +233,11 @@ void player_1(int * col){
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
             player_1(col);}
-
          }
+     else if (*col==-2){
+            system("cls");
+            save_game();
+     }
         else{
             if (*col > 0 && *col <= width){
             int i = checkcol(*col);
@@ -260,13 +263,13 @@ void player_2(int * col){
     printf("Player 2 choose a column\n%c",16);
     *col = scan(&in[0]);
     if (*col==0  ){
-
             if(top_undo != -1)
                 p1_score -=Score(stack_undo[top_undo]);
+
             undo();
             move_1--;
-            
-         
+
+
          if (move_1 < 0 )
          {
              system("cls");
@@ -287,7 +290,7 @@ void player_2(int * col){
             p2_score +=Score(stack_redo[top_redo]);
             redo(79);
             move_2++;
-            
+
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);}
@@ -299,6 +302,10 @@ void player_2(int * col){
             player_2(col);}
 
     }
+      else if (*col==-2){
+            system("cls");
+            save_game();
+     }
     else{
         if (*col > 0 && *col <= width){
         int i = checkcol(*col);
@@ -321,10 +328,6 @@ void player_2(int * col){
 void game(int * selection){
 
     system("cls");
-
-    move_1 = 0 ;
-    move_2 = 0 ;
-
     while( (move_1 + move_2) < (hight*width)){
 
         game_display(p1_score,p2_score,move_1,move_2);
@@ -442,5 +445,81 @@ void computer (int * col)
      move_2++;
 
 }
+
+
+
+
+void save_game(void)
+{
+    FILE * fptr;
+    fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\saved games.bin","wb");
+    fwrite(&move_1,sizeof(int),1,fptr);
+    fwrite(&move_2,sizeof(int),1,fptr);
+    fwrite(&p1_score,sizeof(int),1,fptr);
+    fwrite(&p2_score,sizeof(int),1,fptr);
+    fwrite(&top_undo,sizeof(int),1,fptr);
+    fwrite(stack_undo,sizeof(int),top_undo+1,fptr);
+    fclose(fptr);
+}
+
+void load_game(void)
+{
+    FILE * fptr;
+    fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\saved games.bin","rb");
+    if(fptr==NULL){
+		printf("\n Cannot open the file \n");
+		exit(0);
+	}
+	while (!feof(fptr))
+    {
+    fread(&move_1,sizeof(int),1,fptr);
+    fread(&move_2,sizeof(int),1,fptr);
+    fread(&p1_score,sizeof(int),1,fptr);
+    fread(&p2_score,sizeof(int),1,fptr);
+    fread(&top_undo,sizeof(int),1,fptr);
+    fread(stack_undo,sizeof(int),top_undo+1,fptr);
+    }
+    for (int j=0;j<=top_undo;j++)
+    {
+        if (j%2==0)
+            *(cell+stack_undo[j])=88;
+        else
+            *(cell+stack_undo[j])=79;
+
+    }
+    fclose(fptr);
+    top_undo = -1;
+}
+
+void load_menu (int * selection){
+  scanf("%d",selection);
+  switch (*selection){
+    case 1:
+        system ("cls");
+        load_game();
+        game(selection);
+        break;
+    case 2:
+        system("cls");
+        printf("See you soon!!!");
+        break;
+    case 3:
+        printf("invalid number ,please try again!!\n");
+        load_display(selection);
+        break;
+    case 4:
+        system("cls");
+        mainMenu_display(selection);
+        break;
+    case 5:
+        system("cls");
+        printf("See you soon...");
+        Sleep(1000);
+        break;
+    default:
+        printf("invalid number please try again...\n");
+        load_display(selection);
+    }
+  }
 
 

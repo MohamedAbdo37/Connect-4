@@ -31,3 +31,9 @@ void undo (void);
 void push_redo (int );
 void redo (char);
 
+void save_game(void);
+void load_game(void);
+
+void load_menu (int * selection);
+
+

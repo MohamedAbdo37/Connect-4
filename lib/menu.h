@@ -13,7 +13,6 @@ void playMode(int * selection);
 
 void top_players_menu(int * selection);
 
-void load_menu (int * selection);
 
 void xmlPath(int * selection, char * path);
 
