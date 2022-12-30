@@ -477,3 +477,5 @@ void computer (int * col)
 }
 
 
+
+// انا عايز انتحر
