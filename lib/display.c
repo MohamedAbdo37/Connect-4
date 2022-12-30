@@ -95,40 +95,45 @@ void playMode_display(int * s){
 
 void board_display(){
     color(0x01);
-    printf("\n\t\t|");
+    printf("\n\t\t |");
     for(int i = 0 ; i< width * hight ; i++){
         if(i%width == 0 && i!= 0){
-            printf("\n\t\t");
-            for (int i=0;i<=4*width ;i++)
+            printf("\n\t\t ");
+            for (int i=0;i<=6*width ;i++)
                 printf("%c",205);
 
-            printf("\n\t\t|");
+            printf("\n\t\t |");
         }
+        
         if (*(cell+i)==88){
             color(0x04);
-            printf(" %c",*(cell+i));
+            printf("  %c ",*(cell+i));
         }
         else if (*(cell+i)==79){
             color(0x06);
-            printf(" %c",*(cell+i));
+            printf("  %c ",*(cell+i));
         }
         else {
-            printf(" %c",*(cell+i));
+            printf("  %c ",*(cell+i));
         }
 
         color(0x01);
         printf(" |");
     }
-    printf("\n\t\t");
+    printf("\n\t\t ");
 
-    for (int i=0 ;i <= 4 * width ;i++)
+    for (int i=0 ;i <= 6 * width ;i++)
                 printf("%c",205);
 
     printf("\n\t\t ");
     color(0x07);
 
-    for (int i=0;i<width ;i++)
-        printf(" %d  ",i+1);
+    for (int i=0;i<width ;i++){
+        if(i+1 < 10)
+            printf(" %3d  ",i+1);
+        else
+            printf("  %3d ",i+1);
+    }
     printf("\n");
 
 }
@@ -150,6 +155,18 @@ void game_display(int player_1 ,int player_2,int move_1 ,int move_2){
     printf("Player 2 : %4d point\n",player_2);
 
     board_display();
+    
+    printf("  ");
+    for (int i=0;i<=1*width ;i++)
+        printf("%c",205);
+
+    printf("[{U,u}:undo & {R,r}:Redo & {S,s}:quit and save & {Q,q}:quit without save]");
+
+    for (int i=0;i<=1*width ;i++)
+        printf("%c",205);
+
+    printf("\n\n");
+
 
 }
 
