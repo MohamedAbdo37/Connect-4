@@ -21,8 +21,12 @@ void main(void){
 
     xmlPath_display(path);
     setArgs(&width,&hight,&highScore);
-    
+
+    //int stack_undo[width*hight];
+    //int stack_redo[width * hight];
+   // int top_redo = (width*hight);
     char board[hight][width];
+
     setEmptyBoard(&board[0][0]);
     mainMenu_display(&selectoin);
 

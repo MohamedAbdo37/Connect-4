@@ -163,7 +163,7 @@ int Score(int i){
 int stack_undo[9*7];
 int stack_redo[9*7];
 int top_undo=-1;
-int top_redo=63;
+int top_redo = 63;
 
 void push_undo (int place)
 {
@@ -192,13 +192,15 @@ void redo (char ch)
 }
 
 void player_1(int * col){
+    char in[5]= "";
     color(0x04);
-    printf("Player 1 choose a column");
-    scanf("%d",col);
+    printf("Player 1 choose a column\n%c",16);
+    *col = scan(&in[0]);
     if (*col==0){
+            p2_score -=Score(stack_undo[top_undo]);
          undo();
          move_2--;
-         p2_score=Score(stack_undo[top_undo]);
+         
          if (move_2 < 0 )
          {
              system("cls");
@@ -212,13 +214,14 @@ void player_1(int * col){
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);}
     }
-    else if (*col==11)
+    else if (*col==-1)
     {
         if (top_redo!=63)
         {
-        redo(88);
-        move_1++;
-        p1_score=Score(stack_redo[top_redo]);
+            p1_score +=Score(stack_redo[top_redo]);
+            redo(88);
+            move_1++;
+        
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_2(col);}
@@ -253,9 +256,10 @@ void player_2(int * col){
     printf("Player 2 choose a column");
     scanf("%d",col);
     if (*col==0){
-         undo();
-         move_1--;
-         p1_score=Score(stack_undo[top_undo]);
+            p1_score -=Score(stack_undo[top_undo]);
+            undo();
+            move_1--;
+         
          if (move_1 < 0 )
          {
              system("cls");
@@ -273,9 +277,10 @@ void player_2(int * col){
     {
          if (top_redo!=63)
          {
-        redo(79);
-        move_2++;
-        p2_score=Score(stack_redo[top_redo]);
+            p2_score +=Score(stack_redo[top_redo]);
+            redo(79);
+            move_2++;
+            
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
          player_1(col);}
@@ -324,6 +329,7 @@ void game(int * selection){
             player_2(selection);
         }
     }
+    // puts it in spereat function
     if ((move_1 + move_2) ==(hight*width))
     {
         if (p1_score > p2_score)

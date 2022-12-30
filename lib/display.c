@@ -29,7 +29,7 @@ void setDimension(int x, int y,int h){
 
 void setEmptyBoard(char * array){
     setCellPointer(array);
-
+    //cell = array ;
     for(int i = 0 ; i < width * hight ; i++)
        *(cell+i)= 32;
 
@@ -104,11 +104,13 @@ void board_display(){
             printf("\n\t\t|");
         }
         if (*(cell+i)==88){
-        color(0x04);
-        printf(" %c",*(cell+i));}
+            color(0x04);
+            printf(" %c",*(cell+i));
+        }
         else if (*(cell+i)==79){
-        color(0x06);
-        printf(" %c",*(cell+i));}
+            color(0x06);
+            printf(" %c",*(cell+i));
+        }
         else {
             printf(" %c",*(cell+i));
         }

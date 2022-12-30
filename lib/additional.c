@@ -174,6 +174,34 @@ void check_existence(char name[50],int score)
 
 }
 
+int scan(char * p){
+    
+    scanf("%s",p);
+    if(p[0]=='u' || p[0]== 'U'){
+        return 0;
+    }
+
+    if(p[0]=='r' || p[0]== 'R'){
+        return -1;
+    }
+
+    if(p[0]=='S' || p[0]== 's'){
+        return -2;
+    }
+
+    if(p[0]=='q' || p[0]== 'Q'){
+        return -3 ;
+    }
+        
+    if(p[0]>47 && p[0]<59){
+        return atoi(p) ;
+    }   
+    else{
+        return -4 ;
+    }
+
+}
+
 
 
 
