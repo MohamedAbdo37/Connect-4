@@ -12,6 +12,7 @@ int * selection ;
 
 void setSelection(int *s){
     selection = s ;
+    setSelectionA(s);
 }
 
 
@@ -183,15 +184,25 @@ void top_players(selection){
     struct player temp;
     FILE *fptr;
     int i=0,size,j;
-    fptr=fopen("high score.txt","r");
+    fptr=fopen("dat\\high score.txt","r");
 
     if(fptr==NULL){
         printf("\n Cannot open the file \n");
         exit(0);
     }
     while(!feof(fptr)){
-        fscanf(fptr,"%s%d",pla[i].name,&pla[i].score);
-        i++;
+            int m = 0;
+            char p [50] = "" , c;
+            gets(p);
+            c = p[m] ;
+            while (c != '\0' && !(c > 47 && c < 59)){
+                pla[i].name[m]=c;
+                p[m]='0';
+                m++;
+                c = p[m];
+            }
+            pla[i].score = atoi(p);
+            i++;
     }
     size=i;
     for(i=0;i<size;i++)

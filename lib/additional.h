@@ -1,4 +1,6 @@
 
+void setSelectionA(int * s);
+
 void timePassed();
 
 void setIntialTime(int time);

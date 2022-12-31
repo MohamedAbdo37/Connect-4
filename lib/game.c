@@ -221,45 +221,59 @@ void redo (char ch)
 }
 
 void player_1(int * col ){
+
     int i = -5 ;
     char in[5]= "";
 pl1:
     color(0x04);
     printf("Player 1 choose a column\n%c",16);
     *col = scan(&in[0]);
-    if (*col==0 ){
-            if(top_undo != -1)
-                p2_score -=Score(stack_undo[top_undo]);
-
-                undo();
-                move_2--;
-
-
+    if (*col==0 ){ 
          if (top_undo == -1)
          {
              system("cls");
-             move_2++;
              printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
             player_1(col);
          }
          else{
-            system("cls");
-            game_display(p1_score,p2_score,move_1,move_2);
-
-            if(isComp)
-                player_1(col);
-            else
-                player_2(col);
+            
+            p2_score -=Score(stack_undo[top_undo]);
+                
+                if(isComp){
+                    undo();
+                    isComp = 1 ;
+                    move_1--;
+                    move_2--;
+                    
+                }else{
+                    undo();
+                    move_2--;
+                }
+                if(!move_1)
+                        move_2 = 0 ;
+                system("cls");
+                game_display(p1_score,p2_score,move_1,move_2);
+                if(isComp)
+                    player_1(col);
+                else
+                    player_2(col);
         }
     }
     else if (*col==-1)
     {
-        if (top_redo!=(hight * width))
+        if (top_redo != (hight * width))
         {
-
-            redo(88);
-            move_1++;
+            if(isComp){
+                redo(88);
+                move_1++;
+                move_2++;
+                isComp = 1 ;
+            }else{
+                redo(88);
+                move_1++;
+            }
+            
             p1_score +=Score(stack_redo[top_redo-1]);
 
             system("cls");
@@ -503,7 +517,7 @@ void game_computer (int * selection){
 
 void computer (int * col)
 {
-    isComp =1 ;
+    isComp = 1;
     int i = -5;
     *col = 0;
     srand(time(NULL));
