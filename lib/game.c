@@ -11,6 +11,8 @@ int * stack_undo;
 int * stack_redo;
 int top_undo = -1;
 int top_redo = 63;
+char isComp = 0;
+
 
 void setRowsAndColumns(int x , int y){
     hight = y;
@@ -22,6 +24,7 @@ void setCellPointer(char * i,int * u, int *r){
     stack_undo = u;
     cell = i ;
     top_redo = (width*hight);
+
 }
 
 int checkcol (int col){
@@ -188,9 +191,15 @@ void push_undo (int place)
 void undo (void)
 {
     if (top_undo!=-1){
-    *(cell+stack_undo[top_undo])=32;
-    push_redo(stack_undo[top_undo]);
-    top_undo--;}
+        *(cell+stack_undo[top_undo])=32;
+        push_redo(stack_undo[top_undo]);
+        top_undo--;
+    }
+
+    if (isComp){
+        isComp = 0;
+        undo();
+    }
 
 }
 void push_redo (int place)
@@ -204,9 +213,14 @@ void redo (char ch)
     push_undo(stack_redo[top_redo]);
      top_redo++;
 
+     if (isComp){
+        isComp = 0;
+        redo(79);
+    }
+
 }
 
-void player_1(int * col , int *selection){
+void player_1(int * col ){
     int i = -5 ;
     char in[5]= "";
 pl1:
@@ -217,8 +231,8 @@ pl1:
             if(top_undo != -1)
                 p2_score -=Score(stack_undo[top_undo]);
 
-            undo();
-            move_2--;
+                undo();
+                move_2--;
 
 
          if (top_undo == -1)
@@ -227,12 +241,17 @@ pl1:
              move_2++;
              printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col,selection);
+            player_1(col);
          }
          else{
-        system("cls");
-        game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col,selection);}
+            system("cls");
+            game_display(p1_score,p2_score,move_1,move_2);
+
+            if(isComp)
+                player_1(col);
+            else
+                player_2(col);
+        }
     }
     else if (*col==-1)
     {
@@ -245,24 +264,31 @@ pl1:
 
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col,selection);
+
+            if(isComp)
+                player_1(col);
+            else
+                player_2(col);
          }
          else{
             system("cls");
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col,selection);}
+
+            player_1(col);
+        }
          }
      else if (*col==-2){
             system("cls");
             save_game();
-            mainMenu_display(selection);
+            printf("Game Saved .... ");
+            Sleep(1000);
+            system("cls");
+            mainMenu_display(col);
      }
       else if (*col==-3){
        system("cls");
-       printf("See you soon...\n");
-       sleep(1000);
-
+       mainMenu_display(col);
      }
         else{
             if (*col > 0 && *col <= width){
@@ -280,7 +306,7 @@ pl1:
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
             printf("\n\"Invalid number ,Please try again!\"\n");
-            player_1(col,selection);
+            player_1(col);
         }
     }}
 
@@ -294,22 +320,19 @@ pl2:
     printf("Player 2 choose a column\n%c",16);
     *col = scan(&in[0]);
     if (*col==0  ){
-            if(top_undo != -1)
-                p1_score -=Score(stack_undo[top_undo]);
-
-            undo();
-            move_1--;
-
-
          if (top_undo ==  -1 )
          {
             system("cls");
             move_1++;
             printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col,selection);
+            player_2(col);
          }
          else{
+
+            p1_score -=Score(stack_undo[top_undo]);
+            undo();
+            move_1--;
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
             player_1(col);
@@ -326,25 +349,26 @@ pl2:
 
              system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col,selection);}
+            player_1(col);}
          else
          {
             system("cls");
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col,selection);}
+            player_2(col);}
 
     }
       else if (*col==-2){
             system("cls");
             save_game();
-            mainMenu_display(selection);
+            printf("Game Saved .... ");
+            Sleep(1000);
+            system("cls");
+            mainMenu_display(col);
      }
      else if (*col==-3){
        system("cls");
-       printf("See you soon...\n");
-       sleep(1000);
-
+       mainMenu_display(col);
      }
     else{
         int i = -5 ;
@@ -364,7 +388,7 @@ pl2:
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
         printf("\n\"Invalid number ,Please try again!\"\n");
-        player_2(col,selection);
+        player_2(col);
     }
     }
 }
@@ -383,7 +407,7 @@ void game(int * selection){
             player_2(selection);
         }
     }
-    // puts it in spereat function
+
     if ((move_1 + move_2) ==(hight*width))
     {
         if (p1_score > p2_score)
@@ -479,6 +503,7 @@ void game_computer (int * selection){
 
 void computer (int * col)
 {
+    isComp =1 ;
     int i = -5;
     *col = 0;
     srand(time(NULL));
@@ -565,6 +590,7 @@ void load_menu (int * selection){
         system("cls");
         printf("See you soon...");
         Sleep(1000);
+        exit(0);
         break;
     default:
         printf("invalid number please try again...\n");
