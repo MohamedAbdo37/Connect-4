@@ -296,7 +296,7 @@ pl1:
             if(i == -5)
                 goto pl1;
             push_undo(i);
-            top_redo=63;
+            top_redo=width * hight;
             system("cls");
             addX(i);
             p1_score += Score(i);
@@ -378,7 +378,7 @@ pl2:
             goto pl2;
         }
          push_undo(i);
-         top_redo=63;
+         top_redo=width * hight;
         system("cls");
         addO(i);
         p2_score += Score(i);
