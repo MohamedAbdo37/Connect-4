@@ -9,9 +9,9 @@ void addX (int i);
 
 void addO (int i);
 
-void player_1(int *col , int * selection);
+void player_1(int *col );
 
-void player_2(int * col ,int * selection);
+void player_2(int * col );
 
 void game(int * selection);
 

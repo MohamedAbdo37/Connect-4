@@ -10,7 +10,7 @@ int p1_score , p2_score ;
 int * stack_undo;
 int * stack_redo;
 int top_undo = -1;
-int top_redo = 63;
+int top_redo;
 
 void setRowsAndColumns(int x , int y){
     hight = y;
@@ -206,7 +206,7 @@ void redo (char ch)
 
 }
 
-void player_1(int * col , int *selection){
+void player_1(int * col ){
     int i = -5 ;
     char in[5]= "";
 pl1:
@@ -227,12 +227,12 @@ pl1:
              move_2++;
              printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col,selection);
+            player_1(col);
          }
          else{
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
-         player_2(col,selection);}
+         player_2(col);}
     }
     else if (*col==-1)
     {
@@ -245,18 +245,18 @@ pl1:
 
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col,selection);
+            player_2(col);
          }
          else{
             system("cls");
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col,selection);}
+            player_1(col);}
          }
      else if (*col==-2){
             system("cls");
             save_game();
-            mainMenu_display(selection);
+
      }
       else if (*col==-3){
        system("cls");
@@ -270,7 +270,7 @@ pl1:
             if(i == -5)
                 goto pl1;
             push_undo(i);
-            top_redo=63;
+            top_redo=width * hight;
             system("cls");
             addX(i);
             p1_score += Score(i);
@@ -280,7 +280,7 @@ pl1:
             system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
             printf("\n\"Invalid number ,Please try again!\"\n");
-            player_1(col,selection);
+            player_1(col);
         }
     }}
 
@@ -307,7 +307,7 @@ pl2:
             move_1++;
             printf("No thing to undo!!");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col,selection);
+            player_2(col);
          }
          else{
             system("cls");
@@ -326,19 +326,18 @@ pl2:
 
              system("cls");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_1(col,selection);}
+            player_1(col);}
          else
          {
             system("cls");
             printf("No thing to Redo");
             game_display(p1_score,p2_score,move_1,move_2);
-            player_2(col,selection);}
+            player_2(col);}
 
     }
       else if (*col==-2){
             system("cls");
             save_game();
-            mainMenu_display(selection);
      }
      else if (*col==-3){
        system("cls");
@@ -354,7 +353,7 @@ pl2:
             goto pl2;
         }
          push_undo(i);
-         top_redo=63;
+         top_redo=width * hight;
         system("cls");
         addO(i);
         p2_score += Score(i);
@@ -364,7 +363,7 @@ pl2:
         system("cls");
         game_display(p1_score,p2_score,move_1,move_2);
         printf("\n\"Invalid number ,Please try again!\"\n");
-        player_2(col,selection);
+        player_2(col);
     }
     }
 }
