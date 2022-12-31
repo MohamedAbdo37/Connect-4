@@ -214,7 +214,7 @@ void top_players(selection){
         }
 
     fclose(fptr);
-    for(i=0;i<size;i++)
+    for(i=0;i<highScore;i++)
     printf("%s : %d\n",pla[i].name,pla[i].score);
 
     top_players_display(selection);

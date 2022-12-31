@@ -295,7 +295,7 @@ pl1:
      else if (*col==-2){
             printf("\n1-save game 1\n2-save game 2\n3-save game 3\n");
             int choose;
-            save_choose(choose);
+            //save_choose(choose);
             printf("Game Saved .... ");
             Sleep(100);
             system("cls");
