@@ -293,10 +293,11 @@ pl1:
         }
          }
      else if (*col==-2){
-            system("cls");
-            save_game();
+            printf("\n1-save game 1\n2-save game 2\n3-save game 3\n");
+            int choose;
+            save_choose(choose);
             printf("Game Saved .... ");
-            Sleep(1000);
+            Sleep(100);
             system("cls");
             mainMenu_display(col);
      }
@@ -373,10 +374,11 @@ pl2:
 
     }
       else if (*col==-2){
-            system("cls");
-            save_game();
+             printf("\n1-save game 1\n2-save game 2\n3-save game 3\n");
+             int choose;
+            save_game(choose);
             printf("Game Saved .... ");
-            Sleep(1000);
+            Sleep(100);
             system("cls");
             mainMenu_display(col);
      }
@@ -538,10 +540,22 @@ void computer (int * col)
 
 
 
-void save_game(void)
+void save_game(int choose)
 {
     FILE * fptr;
-    fptr = fopen("data\\saved games.bin","wb");
+    scanf("%d",&choose);
+    switch (choose)
+    {
+        case 1:
+            fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_1.bin","wb");
+            break;
+        case 2:
+            fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_2.bin","wb");
+            break;
+        case 3:
+            fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_3.bin","wb");
+            break;
+    }
     fwrite(&move_1,sizeof(int),1,fptr);
     fwrite(&move_2,sizeof(int),1,fptr);
     fwrite(&p1_score,sizeof(int),1,fptr);
@@ -551,14 +565,31 @@ void save_game(void)
     fclose(fptr);
 }
 
-void load_game(void)
+void load_game(int * selection)
 {
     FILE * fptr;
-    fptr = fopen("data\\saved games.bin","rb");
-    if(fptr==NULL){
-		printf("\n Cannot open the file \n");
-		exit(0);
-	}
+    switch (*selection)
+    {
+        case 1:
+            fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_1.bin","rb");
+            if(fptr==NULL){
+	       	printf("\n Cannot open the file \n");
+		    exit(0);}
+            break;
+        case 2:
+            fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_2.bin","rb");
+            if(fptr==NULL){
+            printf("\n Cannot open the file \n");
+		    exit(0);}
+            break;
+        case 3:
+            fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_3.bin","rb");
+            if(fptr==NULL){
+		    printf("\n Cannot open the file \n");
+		    exit(0);}
+            break;
+    }
+
 	while (!feof(fptr))
     {
     fread(&move_1,sizeof(int),1,fptr);
@@ -580,21 +611,24 @@ void load_game(void)
     top_undo = -1;
 }
 
+
 void load_menu (int * selection){
   scanf("%d",selection);
   switch (*selection){
     case 1:
         system ("cls");
-        load_game();
+        load_game(selection);
         game(selection);
         break;
     case 2:
-        system("cls");
-        printf("See you soon!!!");
+        system ("cls");
+        load_game(selection);
+        game(selection);
         break;
     case 3:
-        printf("invalid number ,please try again!!\n");
-        load_display(selection);
+        system ("cls");
+        load_game(selection);
+        game(selection);
         break;
     case 4:
         system("cls");
