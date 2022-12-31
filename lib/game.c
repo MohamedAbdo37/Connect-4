@@ -228,7 +228,7 @@ pl1:
     color(0x04);
     printf("Player 1 choose a column\n%c",16);
     *col = scan(&in[0]);
-    if (*col==0 ){ 
+    if (*col==0 ){
          if (top_undo == -1)
          {
              system("cls");
@@ -237,15 +237,15 @@ pl1:
             player_1(col);
          }
          else{
-            
+
             p2_score -=Score(stack_undo[top_undo]);
-                
+
                 if(isComp){
                     undo();
                     isComp = 1 ;
                     move_1--;
                     move_2--;
-                    
+
                 }else{
                     undo();
                     move_2--;
@@ -273,7 +273,7 @@ pl1:
                 redo(88);
                 move_1++;
             }
-            
+
             p1_score +=Score(stack_redo[top_redo-1]);
 
             system("cls");
@@ -295,7 +295,7 @@ pl1:
      else if (*col==-2){
             printf("\n1-save game 1\n2-save game 2\n3-save game 3\n");
             int choose;
-            //save_choose(choose);
+            save_game(choose);
             printf("Game Saved .... ");
             Sleep(100);
             system("cls");
@@ -468,9 +468,6 @@ void game_computer (int * selection){
 
     system("cls");
 
-    move_1 = 0 ;
-    move_2 = 0 ;
-
     while( (move_1 + move_2) < (hight*width)){
 
         game_display(p1_score,p2_score,move_1,move_2);
@@ -556,6 +553,7 @@ void save_game(int choose)
             fptr = fopen("C:\\Users\\Ali Hassan\\Desktop\\Connect-4\\save_3.bin","wb");
             break;
     }
+    fwrite(&isComp,sizeof(char),1,fptr);
     fwrite(&move_1,sizeof(int),1,fptr);
     fwrite(&move_2,sizeof(int),1,fptr);
     fwrite(&p1_score,sizeof(int),1,fptr);
@@ -592,6 +590,7 @@ void load_game(int * selection)
 
 	while (!feof(fptr))
     {
+    fread(&isComp,sizeof(char),1,fptr);
     fread(&move_1,sizeof(int),1,fptr);
     fread(&move_2,sizeof(int),1,fptr);
     fread(&p1_score,sizeof(int),1,fptr);
@@ -618,17 +617,26 @@ void load_menu (int * selection){
     case 1:
         system ("cls");
         load_game(selection);
+        if (isComp==0)
         game(selection);
+        else
+        game_computer(selection);
         break;
     case 2:
         system ("cls");
         load_game(selection);
+        if (isComp==0)
         game(selection);
+        else
+        game_computer(selection);
         break;
     case 3:
         system ("cls");
         load_game(selection);
+        if (isComp==0)
         game(selection);
+        else
+        game_computer(selection);
         break;
     case 4:
         system("cls");
